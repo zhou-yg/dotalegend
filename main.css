@@ -1,0 +1,60 @@
+*{
+	margin:0;
+	padding: 0;
+}
+.main{
+	width:100%;
+	min-height: 600px;
+}
+.main_title{
+	background-color:#5FD9CD;
+	width: 100%;
+	height: 60px;
+	font-weight: bold;
+	font-size:25px;
+	color:#FFFFFF;
+	text-align: center;
+	line-height: 60px;
+}
+.main hr{
+	background-color:#f0f0f0;
+	height: 10px;
+	border:none;
+}
+.main .ops_one,.set_one{
+	width: 100%;
+	height: 50px;
+	font-weight:bold;
+	font-size:20px;
+	color:#FFFFFF;
+	text-align:center;
+	line-height:50px
+}
+.main .window_ops .ops_gold{
+	background-color:#EAF786;
+}
+.main .window_ops .ops_equipment{
+	background-color: #FFB5A1;
+}
+.main .ops_setting{
+	background-color: #B8F4FF;
+	background-image:url(setting.png);
+	background-position:center;
+	background-repeat:no-repeat;
+	background-size:30px 30px;
+	font-size: 25px;
+}
+.setting{
+	width: 100%;
+	height: 600px;
+}
+.setting hr{
+	background-color:#f0f0f0;
+	height: 10px;
+	border:none;	
+}
+.setting .set_select{
+	background-color: #B8FFB8;
+	height: 40px;
+	line-height: 40px;
+}
