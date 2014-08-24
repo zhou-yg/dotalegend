@@ -55,6 +55,12 @@
 			height: 40px;
 			display: inline-block;
 		}
+		/*----------------------------*/
+		#sendTo{
+			background-color:#B8F4FF;
+			width: 100%;
+			height: 60px;
+		}
 		</style>
 	</head>
 	<body>
@@ -111,6 +117,7 @@
 				</ul>
 			</div>
 		</section>
+		<button id="sendTo" onclick="sendToPhp()">发送</button>
 	</body>
 	<script src="../jquery2x.js"></script>
 	<script>
@@ -180,8 +187,10 @@
 			});
 			
 			$select.on('change',function(){
-				heroName = parseInt( $(this[this.selectedIndex]).val() );
+				heroName = $(this[this.selectedIndex]).val();
 			});
+			
+			heroName = namesArr[0];
 		});
 		//init avator
 		$(function(){
@@ -202,7 +211,7 @@
 			$($heroAvator.children()).click(function(){
 				
 				$selectedAvator = $(this.innerHTML);
-				heroAvatorUrl = $selecedAavator.attr('src');
+				heroAvatorUrl = $selectedAvator.attr('src');
 				
 				$yourSelect.html($selectedAvator);
 			});
@@ -211,7 +220,7 @@
 		$(function(){
 			
 			var levelArr = ['#blue','#blue1','#purple','#purple1','#purple2','#purple3','#purple4','#orange'];
-			var equipArr = [[],[],[],[],[],[]];
+			var equipArr = [[],[],[],[],[],[],[],[]];
 
 			var $heroEquipments = $('.hero_equipments');
 			var $currentLevel = $('.current_level');
@@ -224,10 +233,13 @@
 			$currentLevel.on('change',function(){
 				
 				var index = parseInt( $(this[this.selectedIndex]).val() );
+				
 				if(!isNaN(index)){
 					
 					currentSelectObjId = levelArr[index];
 					currentEquipArr = equipArr[index];
+					
+					console.log(index);
 					
 				}else{
 					throw new Error('can not get the selected current_level');
@@ -253,6 +265,7 @@
 				var $e = $(this.innerHTML).attr('width','40px').attr('height','40px');
 				
 				var l = children.length;
+				
 				if(l ==6){
 
 					currentEquipArr[0] = $e.attr('m_index');
@@ -262,7 +275,6 @@
 				}else if(l<6){
 
 					currentEquipArr[l] = $e.attr('m_index');
-					currentEquipArr[0] = $e.attr('m_index');
 
 					$theE.append($e);
 				}
@@ -272,6 +284,38 @@
 			console.log('heroName:',heroName);
 			console.log('heroAvatorUrl:',heroAvatorUrl);
 			console.log('equipmentsArr:',equipmentsArr);
+		}
+		function sendToPhp(){
+			
+			var nameObj = {name:heroName};
+			var avatarObj = {avatar:heroAvatorUrl};
+			var equipObj = {};
+
+			var sendObj = {
+				'name':nameObj,
+				'avatar':avatarObj,
+				'equips':equipObj
+			}
+			var sendJSONStr;
+			
+			var lArr = ['b','b1','p','p1','p2','p3','p4','o'];
+			var eArr = ['a','b','c','d','e','f'];
+			
+			equipmentsArr.forEach(function(_el,_i){
+				
+				var obj = {};
+				
+				_el.forEach(function(__el,__i){
+					
+					obj[eArr[__i]] = __el;
+				});
+				
+				equipObj[ lArr[_i] ] = obj;
+			});
+			
+			sendJSONStr = JSON.stringify(sendObj);
+			
+			console.log(sendJSONStr);
 		}
 	</script>
 </html>
