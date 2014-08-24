@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<list>
+	<heroes name="船长" index="0">	
+		<level name="blue">
+			<equipment slot="1"></equipment>
+			<equipment slot="4"></equipment>
+			<equipment slot="3"></equipment>
+			<equipment slot="4"></equipment>
+			<equipment slot="5"></equipment>
+			<equipment slot="6"></equipment>
+		</level>
+		<level name="blue1">
+		</level>
+		<level name="purple">
+		</level>
+		<level name="purple1">
+		</level>
+		<level name="purple2">
+		</level>
+		<level name="purple3">
+		</level>
+		<level name="purple4">
+		</level>
+	</heroes>
+</list>
