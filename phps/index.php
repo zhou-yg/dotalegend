@@ -83,12 +83,13 @@
 				<select class="current_level">
 					<option value="0" selected="true">蓝</option>
 					<option value="1">蓝+1</option>
-					<option value="2">紫</option>
-					<option value="3">紫+1</option>
-					<option value="4">紫+2</option>
-					<option value="5">紫+3</option>
-					<option value="6">紫+4</option>
-					<option value="7">橙</option>
+					<option value="2">蓝+2</option>
+					<option value="3">紫</option>
+					<option value="4">紫+1</option>
+					<option value="5">紫+2</option>
+					<option value="6">紫+3</option>
+					<option value="7">紫+4</option>
+					<option value="8">橙</option>
 				</select>
 				<ul class="levels">
 					<li id='blue'>
@@ -96,6 +97,9 @@
 					</li>
 					<li id='blue1'>
 						蓝色+1:<span class="theE"></span>
+					</li>
+					<li id='blue2'>
+						蓝色+2:<span class="theE"></span>
 					</li>
 					<li id='purple'>
 						紫色__:<span class="theE"></span>
@@ -202,7 +206,7 @@
 			for(var i=0;i<=51;i++){(function(_i){
 			
 					$avatar_li = $('<li></li>').attr('l_index',i);
-					$avatar_img = $('<img/>').attr('src','../avatar95/'+i+'_95_95.jpg').attr('m_index',i).attr('width','100%').attr('height','100%');
+					$avatar_img = $('<img/>').attr('src','../avatar95/'+i+'_95_95.jpg').attr('m_index','../avatar95/'+i+'_95_95.jpg').attr('width','100%').attr('height','100%');
 					$avatar_li.append($avatar_img);
 			
 					$heroAvator.append($avatar_li);
@@ -219,14 +223,16 @@
 		//init equipments
 		$(function(){
 			
-			var levelArr = ['#blue','#blue1','#purple','#purple1','#purple2','#purple3','#purple4','#orange'];
-			var equipArr = [[],[],[],[],[],[],[],[]];
+			var levelArr = ['#blue','#blue1','#blue2','#purple','#purple1','#purple2','#purple3','#purple4','#orange'];
+			var equipArr = [[],[],[],[],[],[],[],[],[]];
 
 			var $heroEquipments = $('.hero_equipments');
 			var $currentLevel = $('.current_level');
 			
 			var currentSelectObjId = levelArr[0];
 			var currentEquipArr = equipArr[0];
+
+			var itemNum = 230;
 
 			equipmentsArr = equipArr;
 			
@@ -246,11 +252,10 @@
 				}
 			});
 			
-			
-			for(var i=0;i<=230;i++){(function(_i){
+			for(var i=0;i<=itemNum;i++){(function(_i){
 			
 					$e_li = $('<li></li>').attr('e_index',i);
-					$e_img = $('<img/>').attr('src','../equipments/'+i+'_e.png').attr('m_index',i).attr('width','100%').attr('height','100%');
+					$e_img = $('<img/>').attr('src','../equipments/'+i+'_e.png').attr('m_index','../equipments/'+i+'_e.png').attr('width','100%').attr('height','100%');
 					$e_li.append($e_img);
 			
 					$heroEquipments.append($e_li);
@@ -287,8 +292,8 @@
 		}
 		function sendToPhp(){
 			
-			var nameObj = {name:heroName};
-			var avatarObj = {avatar:heroAvatorUrl};
+			var nameObj = {'name':heroName};
+			var avatarObj = {'avatar':heroAvatorUrl};
 			var equipObj = {};
 
 			var sendObj = {
@@ -298,7 +303,7 @@
 			}
 			var sendJSONStr;
 			
-			var lArr = ['b','b1','p','p1','p2','p3','p4','o'];
+			var lArr = ['b','b1','b2','p','p1','p2','p3','p4','o'];
 			var eArr = ['a','b','c','d','e','f'];
 			
 			equipmentsArr.forEach(function(_el,_i){
@@ -312,8 +317,14 @@
 				
 				equipObj[ lArr[_i] ] = obj;
 			});
-			
+
 			sendJSONStr = JSON.stringify(sendObj);
+			
+			$.post('http://localhost/dotalegend/phps/heroUpgrade.php',{data:sendJSONStr},function(_data,_status){
+				console.log('data : ',_data);
+				console.log('state : ',_status);
+			});
+			
 			
 			console.log(sendJSONStr);
 		}
