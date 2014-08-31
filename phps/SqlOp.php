@@ -17,7 +17,7 @@ class SqlOp{
 	private $password;
 	
 	private $db;
-	private $selectDB;
+	private $db_name = 'dotalegend';
 
 	public $connect;
 	public $result;
@@ -33,11 +33,11 @@ class SqlOp{
 		$this->password = $_ps;
 		return TRUE;
 	}
-	public function connectTo($_db){
+	public function connectTo(){
 		$this->connect = mysql_connect($this->adress,$this->account,$this->password);
 		mysql_set_charset('utf8',$this->connect);
 		if($this->connect){
-			$this->db = mysql_select_db($_db);
+			$this->db = mysql_select_db($this->db_name);
 			if($this->db){
 				return TRUE;
 			}else{

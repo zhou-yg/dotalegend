@@ -1,9 +1,8 @@
 ﻿<?php
 //插入或更新数据库中的装备信息，从equipments文件夹
 $sqlOp = include'SqlOp.php';
-$db_name = 'dotalegend';
 
-$connectResult = $sqlOp->connectTo($db_name);
+$connectResult = $sqlOp->connectTo();
 if($connectResult){
 		
 	$queryResult = $sqlOp->queryTo('select * from equipment');

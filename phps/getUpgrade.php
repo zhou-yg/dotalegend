@@ -1,6 +1,5 @@
 <?php
 $sqlOp = include'SqlOp.php';
-$db_name = 'dotalegend';
 
 $queryHeroName = $_GET['heroName'];
 
@@ -18,7 +17,7 @@ $e_p4 = null;
 $e_o  = null;
 
 
-$connectResult = $sqlOp->connectTo($db_name);
+$connectResult = $sqlOp->connectTo();
 if($connectResult){
 	
 	$queryHeroResult = $sqlOp->queryTo("select * from hero where name='$queryHeroName' ");
@@ -30,6 +29,7 @@ if($connectResult){
 			$heroId = $array['id'];
 			$heroAvatar = $array['avatar'];
 		}else{
+			echo 'heroName: '.$queryHeroName.'<br>';
 			echo 'this hero is not existed';
 			return;
 		}

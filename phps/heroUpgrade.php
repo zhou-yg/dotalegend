@@ -1,6 +1,5 @@
 ﻿<?php
 $sqlOp = include'SqlOp.php';
-$db_name = 'dotalegend';
 
 $jsonData = $_POST['data'];
 $jsonData = delete_slash($jsonData);
@@ -163,7 +162,7 @@ $e_p3 = serialize($e_p3);
 $e_p4 = serialize($e_p4);
 $e_o  = serialize($e_o);
 
-$connectResult = $sqlOp->connectTo($db_name);
+$connectResult = $sqlOp->connectTo();
 if($connectResult){
 	//if hero already exitsted,update else insert
 	$queryResult = $sqlOp->queryTo("select * from hero where name='$name' ");
