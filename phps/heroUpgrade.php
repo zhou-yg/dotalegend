@@ -1,6 +1,7 @@
 ﻿<?php
 $sqlOp = include'SqlOp.php';
 
+//$jsonData = "{\"name\":{\"name\":\"火枪\"},\"avatar\":{},\"equips\":{\"b\":{\"a\":\"../equipments/228_e.png\",\"b\":\"../equipments/228_e.png\",\"c\":\"../equipments/228_e.png\",\"d\":\"../equipments/228_e.png\",\"e\":\"../equipments/228_e.png\",\"f\":\"../equipments/228_e.png\"},\"b1\":{},\"b2\":{\"a\":\"../equipments/202_e.png\",\"b\":\"../equipments/202_e.png\",\"c\":\"../equipments/202_e.png\",\"d\":\"../equipments/202_e.png\",\"e\":\"../equipments/202_e.png\",\"f\":\"../equipments/202_e.png\"},\"p\":{},\"p1\":{},\"p2\":{},\"p3\":{},\"p4\":{},\"o\":{}}}";
 $jsonData = $_POST['data'];
 $jsonData = delete_slash($jsonData);
 $jsonObj = json_decode($jsonData);
@@ -122,31 +123,31 @@ $updateArr = Array(
 	7=>TRUE,
 	8=>TRUE,
 );
-if($e_b['a']===''){
+if($e_b['a']==''){
 	$updateArr[0] = FALSE;
 }
-if($e_b1['a']===''){
+if($e_b1['a']==''){
 	$updateArr[1] = FALSE;
 }
-if($e_b2['a']===''){
+if($e_b2['a']==''){
 	$updateArr[2] = FALSE;
 }
-if($e_p['a']===''){
+if($e_p['a']==''){
 	$updateArr[3] = FALSE;
 }
-if($e_p1['a']===''){
+if($e_p1['a']==''){
 	$updateArr[4] = FALSE;
 }
-if($e_p2['a']===''){
+if($e_p2['a']==''){
 	$updateArr[5] = FALSE;
 }
-if($e_p3['a']===''){
+if($e_p3['a']==''){
 	$updateArr[6] = FALSE;
 }
-if($e_p4['a']===''){
+if($e_p4['a']==''){
 	$updateArr[7] = FALSE;
 }
-if($e_o['a']===''){
+if($e_o['a']==''){
 	$updateArr[8] = FALSE;
 }
 

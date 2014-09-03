@@ -3,7 +3,6 @@
 	padding: 0;
 }
 body{
-	overflow: hidden;
 }
 .main{
 	width:100%;
@@ -40,6 +39,9 @@ body{
 }
 .main .window_ops .ops_equipment{
 	background-color: #FFB5A1;
+}
+.main .window_ops .ops_equipment:active{
+	background-color: rgb(215, 85, 50);
 }
 .main .ops_setting{
 	background-color: #B8F4FF;

@@ -206,7 +206,7 @@
 			for(var i=0;i<=51;i++){(function(_i){
 			
 					$avatar_li = $('<li></li>').attr('l_index',i);
-					$avatar_img = $('<img/>').attr('src','../avatar95/'+i+'_95_95.jpg').attr('m_index','../avatar95/'+i+'_95_95.jpg').attr('width','100%').attr('height','100%');
+					$avatar_img = $('<img/>').attr('src','../avatar95/'+i+'_95_95.jpg').attr('a_index',i+'_95_95.jpg').attr('width','100%').attr('height','100%');
 					$avatar_li.append($avatar_img);
 			
 					$heroAvator.append($avatar_li);
@@ -215,7 +215,7 @@
 			$($heroAvator.children()).click(function(){
 				
 				$selectedAvator = $(this.innerHTML);
-				heroAvatorUrl = $selectedAvator.attr('src');
+				heroAvatorUrl = $selectedAvator.attr('a_index');
 				
 				$yourSelect.html($selectedAvator);
 			});
@@ -255,7 +255,7 @@
 			for(var i=0;i<=itemNum;i++){(function(_i){
 			
 					$e_li = $('<li></li>').attr('e_index',i);
-					$e_img = $('<img/>').attr('src','../equipments/'+i+'_e.png').attr('m_index','../equipments/'+i+'_e.png').attr('width','100%').attr('height','100%');
+					$e_img = $('<img/>').attr('src','../equipments/'+i+'_e.png').attr('e_index',i+'_e.png').attr('width','100%').attr('height','100%');
 					$e_li.append($e_img);
 			
 					$heroEquipments.append($e_li);
@@ -273,13 +273,13 @@
 				
 				if(l ==6){
 
-					currentEquipArr[0] = $e.attr('m_index');
+					currentEquipArr[0] = $e.attr('e_index');
 
 					$theE.html($e);
 					
 				}else if(l<6){
 
-					currentEquipArr[l] = $e.attr('m_index');
+					currentEquipArr[l] = $e.attr('e_index');
 
 					$theE.append($e);
 				}
@@ -321,6 +321,7 @@
 			sendJSONStr = JSON.stringify(sendObj);
 			
 			$.post('http://localhost/dotalegend/phps/heroUpgrade.php',{data:sendJSONStr},function(_data,_status){
+				alert(_data);
 				console.log('data : ',_data);
 				console.log('state : ',_status);
 			});

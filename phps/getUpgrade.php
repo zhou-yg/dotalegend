@@ -2,6 +2,7 @@
 $sqlOp = include'SqlOp.php';
 
 $queryHeroName = $_GET['heroName'];
+$isOnlyJSON = $_GET['onlyjson'];
 
 $jsonArray = null;
 $heroId = null;
@@ -64,6 +65,24 @@ if($connectResult){
 			$e_p4 = unserialize($e_p4);
 			$e_o  = unserialize($e_o);
 			
+			//display
+			if($isOnlyJSON != 'yes'){
+				echo "<img src='".$heroAvatar."' width='75px'>";
+				echo '<br><hr>';
+				$allArr = array($e_b,$e_b1,$e_b2,$e_p,$e_p1,$e_p2,$e_p3,$e_p4,$e_o);
+				for($i=0;$i<count($allArr);$i++){
+				
+					$arr = $allArr[$i];
+					echo "<img src='../equipments/".$arr['a']."' width='45px'>";
+					echo "<img src='../equipments/".$arr['b']."' width='45px'>";
+					echo "<img src='../equipments/".$arr['c']."' width='45px'>";
+					echo "<img src='../equipments/".$arr['d']."' width='45px'>";
+					echo "<img src='../equipments/".$arr['e']."' width='45px'>";
+					echo "<img src='../equipments/".$arr['f']."' width='45px'>";
+					echo '<br><hr>';
+				}
+			}
+			//------------------------------
 			$jsonArray = array(
 				'hero'=>array(
 					'name'=>$queryHeroName,
@@ -74,16 +93,14 @@ if($connectResult){
 					'blue1 ' =>$e_b1,
 					'blue2'  =>$e_b2,
 					'purple' =>$e_p,
-					'purple1'=>$e_p1,
+ 					'purple1'=>$e_p1,
 					'purple2'=>$e_p2,
 					'purple3'=>$e_p3,
 					'purple4'=>$e_p4,
 					'orange' =>$e_o
 				)
 			);
-			
 			$jsonStr = json_encode($jsonArray);
-			
 			echo $jsonStr;
 			
 		}else{
