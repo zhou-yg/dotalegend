@@ -67,7 +67,7 @@ if($connectResult){
 			
 			//display
 			if($isOnlyJSON != 'yes'){
-				echo "<img src='".$heroAvatar."' width='75px'>";
+				echo "<img src='../avatar95/".$heroAvatar."' width='75px'>";
 				echo '<br><hr>';
 				$allArr = array($e_b,$e_b1,$e_b2,$e_p,$e_p1,$e_p2,$e_p3,$e_p4,$e_o);
 				for($i=0;$i<count($allArr);$i++){

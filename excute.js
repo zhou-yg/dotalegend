@@ -5,25 +5,40 @@ var heroSelectedArr = [];
 //init
 $(function(){
 
-	var $main = $('.main');
-	var $set  = $('.setting');
-	var $body = $('body');
-
-	$main.height(allHeight);
-	$set.height(allHeight);
-	$body.height(allHeight);
+	$('body').height(allHeight);
+	$('.main').height(allHeight);
+	$('.setting').height(allHeight);;
+	$('.hero_query').height(allHeight);
 });
 //操作
 $(function(){
 	
-	var $set          = $('.setting'); 
-	var $opsGold      = $('.main .ops_gold');
-	var $opsEquipment = $('.main .ops_equipment');
-	var $opsSetting   = $('.main .ops_setting');
+	var $set        = $('.setting'); 
+	var $opsSetting = $('.main .ops_setting');
+	var $set_upto   = $('.setting .set_upto');
+
+	var $test       = $('.window_ops .ops_test');
+	var $heroQuery  = $('.hero_query');
+	var $leftTo     = $('.hero_query .leftto');
 	
 	$opsSetting.click(function(){
 		$set.animate({
 			top:-allHeight
+		},1000);
+	});
+	$set_upto.click(function(){
+		$set.animate({
+			top:0
+		},1000);
+	});
+	$test.click(function(){
+		$heroQuery.animate({
+			left:0
+		},1000);
+	});
+	$leftTo.click(function(){
+		$heroQuery.animate({
+			left:'100%'
 		},1000);
 	});
 });
@@ -33,10 +48,11 @@ $(function(){
 	var $set        = $('.setting');
 	var $set_title  = $('.main_title');
 	var $set_select = $('.setting .set_select');
-	var $set_upto   = $('.setting .set_upto');
 	var $set_heroes = $('.setting .heroes');
-	
+	var $set_upto   = $('.setting .set_upto');
+
 	var isSelected  = false;
+	var selectedArr = new Array();
 	
 	$set_heroes.height(allHeight - $set_title.height() - $set_select.height() - $set_upto.height());
 	
@@ -55,7 +71,7 @@ $(function(){
 		
 		if(!p.style.backgroundColor || p.style.backgroundColor == ''){
 			selectedArr.push(p);
-			p.style.backgroundColor = 'rgb(0, 255, 48)';
+			p.style.backgroundColor = '#00FF30';
 		}else{
 			p.style.backgroundColor = '';
 			var arr = [];
@@ -74,14 +90,8 @@ $(function(){
 			$('.set_upto').css('backgroundImage','url(cancel.png)');
 			isSelected=false;
 		}
-		console.log(selectedArr,selectedArr.length);
 	});
-	
-	$set_upto.click(function(){
-		$set.animate({
-			top:0
-		},1000);
-	});
+
 });
 //equipments upgrade
 $(function(){

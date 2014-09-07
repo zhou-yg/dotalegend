@@ -17,7 +17,7 @@ class SqlOp{
 	private $password;
 	
 	private $db;
-	private $db_name = 'dotalegend';
+	private $db_name = 'a0831182501';
 
 	public $connect;
 	public $result;
@@ -27,10 +27,11 @@ class SqlOp{
 		$this->account = "root";
 		$this->password = 123456;
 	}
-	public function setProperty($_ad,$_ac,$_ps){
+	public function setProperty($_ad,$_ac,$_ps,$_dbName){
 		$this->adress = $_ad.$this->port;
 		$this->account = $_ac;
 		$this->password = $_ps;
+		$this->db_name = $_dbName;
 		return TRUE;
 	}
 	public function connectTo(){

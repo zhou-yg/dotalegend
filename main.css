@@ -3,14 +3,9 @@
 	padding: 0;
 }
 body{
+	overflow: hidden;
 }
-.main{
-	width:100%;
-	height: 100%;
-	position: relative;
-}
-.main_title{
-	background-color:rgb(0, 200, 180);
+._title{
 	width: 100%;
 	height: 60px;
 	font-weight: bold;
@@ -18,6 +13,16 @@ body{
 	color:#FFFFFF;
 	text-align: center;
 	line-height: 60px;
+
+}
+.main{
+	width:100%;
+	height: 100%;
+	position: relative;
+	
+}
+.main_title{
+	background-color:#78A2E1;
 }
 .main hr{
 	background-color:#FFFFFF;
@@ -25,14 +30,16 @@ body{
 	height: 10px;
 	display: none;
 }
-.main .ops_one,.set_one{
+.main .ops_one,.set_one,.query_one{
 	width: 100%;
 	height: 50px;
 	font-weight:bold;
 	font-size:20px;
 	color:#FFFFFF;
 	text-align:center;
-	line-height:50px
+	line-height:50px;
+	
+	cursor: default;
 }
 .main .window_ops .ops_gold{
 	background-color:#EAF786;
@@ -42,6 +49,12 @@ body{
 }
 .main .window_ops .ops_equipment:active{
 	background-color: rgb(215, 85, 50);
+}
+.main .window_ops .ops_test{
+	background-color: #D598CE;
+}
+.main .window_ops .ops_test:active{
+	background-color: #E0BEDC;
 }
 .main .ops_setting{
 	background-color: #B8F4FF;
@@ -56,10 +69,14 @@ body{
 .main .ops_setting:active{
 	background-color: rgb(0, 0, 255);
 }
+/*----------------------------------*/
 .setting{
 	background-color:#FFFFFF;
 	width: 100%;
 	position:relative;
+}
+.setting_title{
+	background-color:rgb(0, 200, 180);
 }
 .setting hr{
 	background-color:rgb(188, 188, 188);
@@ -85,15 +102,36 @@ body{
 	display: block;
 }
 .setting .set_upto{
-	background-color: rgb(255, 147, 147);
+	background-color: #FF9393;
 	background-image:url(cancel.png);
 	background-position:center;
 	background-repeat:no-repeat;
 	background-size:30px 30px;
-	color:black;
 	position: absolute;
 	bottom: 0;
 }
 .setting .set_upto:active{
-	background-color: rgb(255, 0, 0);
+	background-color: #FF0000;
+}
+/*----------------------------------*/
+.hero_query{
+	background-color:#FFFFFF;
+	position: relative;
+	left: 100%;
+	top:-200%;
+}
+.hero_query .grade{
+	background-color: #EAABDA;
+}
+.hero_query .leftto{
+	background-color: #FF9393;
+	background-image:url(cancel.png);
+	background-position:center;
+	background-repeat:no-repeat;
+	background-size:30px 30px;
+	position: absolute;
+	bottom: 0;
+}
+.hero_query .leftto:active{
+	background-color: #FF0000;
 }
