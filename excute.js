@@ -100,5 +100,7 @@ $(function(){
 	
 	opEquip.click(function(){
 		
+		
+		
 	});
 });
