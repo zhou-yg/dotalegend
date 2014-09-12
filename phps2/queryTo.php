@@ -9,7 +9,6 @@ if(!$heroId){
 $url = 'http://d.longtugame.com/daotadata/hero?id='.$heroId;
 $html = file_get_contents($url);
 $htmlTexts = htmlentities($html, ENT_NOQUOTES, 'UTF-8');
-echo $htmlTexts;
 $htmlTexts = $html;
 echo "<br>||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||<br>";
 //<img src="http://d.longtugame.com/uploadimg/dotaData/equipment/pic/2.png">
@@ -56,24 +55,11 @@ for ($i=0; $i < count($equipArr); $i++) {
 	$end = strripos($str, '"');
 	
 	$imgSrc = substr($str, $begin,$end - $begin);
-
-	echo $imgSrc.'<br>';	
-}
-
-for ($i=0; $i < count($equipArr); $i++) { 
-
-	if($i%6==0){
-		echo '<br>';
-	}
-
-	$str = $equipArr[$i];
 	
-	$begin = strpos($str, 'src="') + 5;
-	$end = strripos($str, '"');
-	
-	$imgSrc = substr($str, $begin,$end - $begin);
+	$end2 = strripos($imgSrc, '/')+1;
 
-	echo '<img src="'.$imgSrc.'" width="50px">';	
+	echo $imgSrc.'<br>';
+	echo substr($imgSrc, 0,$end2).'<br>';	
+	echo substr($imgSrc, $end2,strlen($imgSrc)).'<br>';
 }
-
 ?>

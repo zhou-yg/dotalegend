@@ -17,7 +17,7 @@ class SqlOp{
 	private $password;
 	
 	private $db;
-	private $db_name = 'a0831182501';
+	private $db_name = 'dotaLegend';
 
 	public $connect;
 	public $result;
