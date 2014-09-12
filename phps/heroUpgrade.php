@@ -258,7 +258,7 @@ if($heroId===null){
 			}		
 		}else{
 			//insert
-			$queryInsertResult = $sqlOp->queryTo("insert into upgrade values(null,'$heroId','$e_b','$e_b1','$e_b2','$e_p','$e_p1','$e_p2','$e_p3','$e_p4','$e_o')");
+			$queryInsertResult = $sqlOp->queryTo("insert into upgrade_wrong values(null,'$heroId','$e_b','$e_b1','$e_b2','$e_p','$e_p1','$e_p2','$e_p3','$e_p4','$e_o')");
 			if($queryInsertResult){
 				
 				echo 'insert into success';
