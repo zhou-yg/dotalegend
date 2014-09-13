@@ -10,6 +10,6 @@
 * _英雄进阶所需装备_
 
 
-api:http://www.jyouger.com/dotalegend/phps2/getHero.php?hero=*your provide name*;
+api:http://www.jyouger.com/dotalegend/phps2/getHero.php?hero=**your provide name**;
 api:http://www.jyouger.com/dotalegend/phps2/getAllHeroes.php;
 
