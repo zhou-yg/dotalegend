@@ -58,7 +58,7 @@ body{
 }
 .main .ops_setting{
 	background-color: #B8F4FF;
-	background-image:url(setting.png);
+	background-image:url(../image/setting.png);
 	background-position:center;
 	background-repeat:no-repeat;
 	background-size:30px 30px;
@@ -103,7 +103,7 @@ body{
 }
 .setting .set_upto{
 	background-color: #FF9393;
-	background-image:url(cancel.png);
+	background-image:url(../image/cancel.png);
 	background-position:center;
 	background-repeat:no-repeat;
 	background-size:30px 30px;
@@ -125,7 +125,7 @@ body{
 }
 .hero_query .leftto{
 	background-color: #FF9393;
-	background-image:url(cancel.png);
+	background-image:url(../image/cancel.png);
 	background-position:center;
 	background-repeat:no-repeat;
 	background-size:30px 30px;
