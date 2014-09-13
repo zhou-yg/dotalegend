@@ -23,8 +23,9 @@ if($connectTo){
 			}
 
 			$heroArr[$c] = array(
-				'name'=>$array['name'],
-				'avatar'=>$array['prefix'].$array['avatar']
+				'name'  => $array['name'],
+				'pre'   => $array['prefix'],
+				'avatar'=> $array['avatar']
 			);
 			
 			$array = mysql_fetch_array($sqlOp->result);

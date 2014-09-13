@@ -13,13 +13,11 @@ body{
 	color:#FFFFFF;
 	text-align: center;
 	line-height: 60px;
-
 }
 .main{
 	width:100%;
-	height: 100%;
+	height: 550px;
 	position: relative;
-	
 }
 .main_title{
 	background-color:#78A2E1;
@@ -114,16 +112,16 @@ body{
 	background-color: #FF0000;
 }
 /*----------------------------------*/
-.hero_query{
+.query{
 	background-color:#FFFFFF;
 	position: relative;
 	left: 100%;
 	top:-200%;
 }
-.hero_query .grade{
+.query .upgrade{
 	background-color: #EAABDA;
 }
-.hero_query .leftto{
+.query .leftto{
 	background-color: #FF9393;
 	background-image:url(../image/cancel.png);
 	background-position:center;
@@ -132,6 +130,6 @@ body{
 	position: absolute;
 	bottom: 0;
 }
-.hero_query .leftto:active{
+.query .leftto:active{
 	background-color: #FF0000;
 }
