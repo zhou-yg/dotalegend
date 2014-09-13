@@ -6,6 +6,7 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>	
 		<link rel="stylesheet" type="text/css" href="Public/css/main.css" />
 	</head>
+	<script src="Public/js/jquery2x.js"></script>
 	<body>
 		<section class="main">
 			<h2 class="_title main_title">主界面</h2>
@@ -17,21 +18,36 @@
 			</div>
 			<p class="ops_one ops_setting">+</p>
 		</section>
+		<!--底部栏,点击后，从下侧边滑入-->
 		<section class="setting">
 			<h2 class="_title setting_title">设置界面</h2>
 			<p class="set_one set_select">请选择英雄(多选)</p>
 			<ul class="heroes"></ul>
-			<p class="set_one set_upto">*</p>
+			<p class="set_one set_upto"></p>
 		</section>
 		<!--侧边栏,点击后，从右侧边滑入-->
-		<aside class="hero_query">
-			<h2 class="_title grade">英雄进阶</h2>
+		<aside class="query">
+			<h2 class="_title upgrade">英雄进阶</h2>
 			<p class="query_one leftto">←</p>
 		</aside>
 	</body>
-	<script src="Public/js/jquery2x.js"></script>
+	<script>
+	var allWidth = $(window).width();
+	var allHeight = $(window).height();
+
+	var heroSelectedArr = [];
+	//init
+	$(function(){
+		$('body').height(allHeight);
+		$('.main').height(allHeight);
+		$('.setting').height(allHeight);;
+		$('.query').height(allHeight);
+	});
+	</script>
 	<script src="Public/js/underscore-min.js"></script>
 	<script src="Public/js/backbone-min.js"></script>
-	<script src="Public/js/model.js"></script>
-	<script src="Public/js/excute.js"></script>
+	<script src="Js/models/main.js"></script>
+	<script src="Js/models/main.js"></script>
+	<script src="Js/models/setting.js"></script>
+	<script src="Js/models/query.js"></script>
 </html>
