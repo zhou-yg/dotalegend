@@ -1,0 +1,82 @@
+.query{
+	background-color:#FFFFFF;
+	position: relative;
+	left: 100%;
+	top:-200%;
+}
+.query .query_title{
+	background-color: #EAABDA;
+}
+.query .query_window{
+	width:100%;
+	float: left;
+	
+	overflow-y: scroll;
+}
+.query .query_window .hero_one{
+	width:100%;
+	float: left;
+}
+.query .query_window .hero_one h4{
+	margin-top:2%;
+	margin-left:2%;
+	width:98%;
+	float: left;
+}
+.query .query_window .hero_one .hero_avatar{
+	width:20%;
+	float: left;
+}
+.query .query_window .hero_one .hero_name{
+	background-color:#FF9393;
+	margin-left:2.5%;
+	font-size:20px;
+	float: left;
+}
+.query .query_window .upgrade_levels{
+	width:100%;
+	float: left;
+}
+.query .query_window .upgrade_level_one{
+	width:100%;
+	float: left;
+}
+.query .query_window .upgrade_level_one li{
+	background-color: #EAF786;
+	margin:0 1% 1% 1%;
+	width:14.6%;
+	height:45px;	
+	list-style:none;	
+	float: left;
+}
+.query .query_window .upgrade_levels li{
+	background-color:#FFFFFF;
+	margin:0 1% 2% 1%;
+	width: 23%;
+	border:1px solid #C4C7EC;
+	box-sizing:border-box;
+	list-style:none;
+	text-align:center;
+	float: left;
+	
+	cursor: default;
+}
+.query .query_window .upgrade_levels li:hover{
+	background-color: #78A2E1;
+}
+.query .query_window .upgrade_levels li.selected{
+	background-color: #78A2E1;
+}
+
+.query .leftto{
+	background-color: #FF9393;
+	background-image:url(../image/cancel.png);
+	background-position:center;
+	background-repeat:no-repeat;
+	background-size:30px 30px;
+	position: absolute;
+	bottom: 0;
+}
+.query .leftto:active{
+	background-color: #FF0000;
+}

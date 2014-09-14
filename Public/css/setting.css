@@ -1,0 +1,45 @@
+/*----------------------------------*/
+.setting{
+	background-color:#FFFFFF;
+	width: 100%;
+	position:relative;
+}
+.setting_title{
+	background-color:rgb(0, 200, 180);
+}
+.setting hr{
+	background-color:rgb(188, 188, 188);
+	height: 10px;
+	border:none;	
+}
+.setting .set_select{
+	background-color: #7EE67E;
+	height: 40px;
+	line-height: 40px;
+}
+.setting .heroes{
+	overflow-y:scroll;
+	height: auto;
+}
+.setting .heroes li{
+	width: 16%;
+	padding:2%;
+	list-style: none;
+	float: left;
+}
+.setting .heroes img{
+	display: block;
+}
+.setting .set_upto{
+	background-color: #FF9393;
+	background-image:url(../image/cancel.png);
+	background-position:center;
+	background-repeat:no-repeat;
+	background-size:30px 30px;
+	position: absolute;
+	bottom: 0;
+}
+.setting .set_upto:active{
+	background-color: #FF0000;
+}
+/*----------------------------------*/
