@@ -30,53 +30,12 @@
 		<!--侧边栏,点击后，从右侧边滑入-->
 		<aside class="query">
 			<h2 class="_title query_title">英雄进阶</h2>
-			<ul class="query_window">
+			<div class="query_window">
 				<!--
-				<li class="hero_one">
-					<h4>
-						<div class="hero_avatar">
-							<img src="Public/image/SF.png" width="100%"/>
-						</div>
-						<span class="hero_name">Name</span>
-					</h4>
-					<ul class="upgrade_levels">
-						<li>白</li>
-						<li>绿</li>
-						<li class="selected">绿+1</li>
-						<li>蓝</li>
-						<li>蓝+1</li>
-						<li>蓝+2</li>
-						<li>紫</li>
-						<li>紫+1</li>
-						<li>紫+2</li>
-						<li>紫+3</li>
-						<li>紫+4</li>
-						<li>橙</li>
-					</ul>
-					<ul class="upgrade_level_one">
-						<li></li>
-						<li></li>
-						<li></li>
-						<li></li>
-						<li></li>
-						<li></li>
-					</ul>
-				</li>
-				-->
-			</ul>
-			<p class="query_one leftto">←</p>
-		</aside>
-		<script type="text/template" id="hero_one">
-			<li class="hero_one">
-				<h4>
-					<div class="hero_avatar">
-						<img src="<%= heroAvatar %>" width="100%"/>
-					</div>
-				</h4>
 				<ul class="upgrade_levels">
-					<li type="level" class="selected">白</li>
+					<li type="level">白</li>
 					<li type="level">绿</li>
-					<li type="level">绿+1</li>
+					<li class="selected" type="level">绿+1</li>
 					<li type="level">蓝</li>
 					<li type="level">蓝+1</li>
 					<li type="level">蓝+2</li>
@@ -87,27 +46,61 @@
 					<li type="level">紫+4</li>
 					<li type="level">橙</li>
 				</ul>
-				<ul class="upgrade_level_one">
-					<li>
-						<img src="<%= item0 %>" width="100%"/>
-					</li>
-					<li>
-						<img src="<%= item1 %>" width="100%"/>
-					</li>
-					<li>
-						<img src="<%= item2 %>" width="100%"/>
-					</li>
-					<li>
-						<img src="<%= item3 %>" width="100%"/>
-					</li>
-					<li>
-						<img src="<%= item4 %>" width="100%"/>
-					</li>
-					<li>
-						<img src="<%= item5 %>" width="100%"/>
-					</li>
+				<div class="heroes_list">
+					<div class="hero_one">
+						<h4>
+							<div class="hero_avatar">
+								<img src="Public/image/SF.png" width="100%"/>
+							</div>
+							<span class="hero_name">Name</span>
+						</h4>
+						<ul class="upgrade_level_one">
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+						</ul>
+					</div>
+				</div>
+				-->
+			</div>
+			<p class="query_one leftto">←</p>
+		</aside>
+		<script id="all_levels" type="text/template">
+			<ul class="upgrade_levels">
+				<li class="selected" type="level">白</li>
+				<li type="level">绿</li>
+				<li type="level">绿+1</li>
+				<li type="level">蓝</li>
+				<li type="level">蓝+1</li>
+				<li type="level">蓝+2</li>
+				<li type="level">紫</li>
+				<li type="level">紫+1</li>
+				<li type="level">紫+2</li>
+				<li type="level">紫+3</li>
+				<li type="level">紫+4</li>
+				<li type="level">橙</li>
+			</ul>
+		</script>	
+		<script id="hero_one_items" type="text/template">	
+			<div id="<%= hero_ident %>" class="heroes_list">
+				<h4>
+					<div class="hero_avatar">
+						<img src="<%= hero_avatar %>" width="100%"/>
+					</div>
+					<span class="hero_name"><%= hero_name %></span>
+				</h4>
+				<ul id="items" class="upgrade_level_one">
+					<li><img src="<%= item0 %>" width="100%"></li>
+					<li><img src="<%= item1 %>" width="100%"></li>
+					<li><img src="<%= item2 %>" width="100%"></li>
+					<li><img src="<%= item3 %>" width="100%"></li>
+					<li><img src="<%= item4 %>" width="100%"></li>
+					<li><img src="<%= item5 %>" width="100%"></li>
 				</ul>
-			</li>
+			</div>
 		</script>
 	</body>
 	<script>

@@ -1,11 +1,13 @@
 $(function(){
-	var HeroView;
+	var LevelsView,ItemsView;
 	var itemIn = ['w','g','g1','b','b1','b2','p','p1','p2','p3','p4','o'];
 	(function(){
-		var HeroV = Backbone.View.extend({
+		var LevelsV = Backbone.View.extend({
 			
-			initialize:function(_obj){
-				
+			initialize:function(){
+				this.allHeroesV = new Object();
+						
+				console.log('levelsV init');
 			},
 			events : {
 				'click li[type=level]':'doSelect'
@@ -13,31 +15,52 @@ $(function(){
 			doSelect : function(_event){
 				
 				var target = _event.target;
+				var $allLevels = $('.upgrade_levels');
+				var len = $allLevels.children().length;
+				var ii=0;
 				
-				if(this.currentLevel!=target){
-
-					$(this.currentLevel).removeClass('selected');
-
-					$(_event.target).addClass('selected');
-					
-					var ii;
-					var levelArr = document.querySelector('.upgrade_levels').children;
-					
-					for (var i=0; i < levelArr.length; i++) {
-						if(levelArr[i]==target){
-							ii=i;
-							break;
-						}
-					};
-					
-					this.render(null,ii);
-					
-					console.log($(this.currentLevel).html());
+				if(target == this.currentLi){
+					return;
 				}
+				
+				$('.upgrade_levels .selected').removeClass('selected');
+				
+				for(var i=0;i<len;i++){
+
+					if($allLevels.children[i] == target){
+						ii = i;
+						break;
+					}
+				}
+				
+				console.log('i-ii',i,ii);
+				
+				for(var k in this.allHeroesV){
+					this.allHeroesV[k].render(null,ii);
+				}
+				
+				this.currentLi = $allLevels.children()[ii];
+				$(this.currentLi).addClass('selected');
+			},
+			add : function(_key,_heroV){
+				
+				this.allHeroesV[_key] = _heroV;
+			},
+			render : function(){
+
+				$(this.el).html($('#all_levels').html());
+
+				this.currentLi = $('.upgrade_levels').children()[0];
+			}		
+		});
+		var itemsV = Backbone.View.extend({
+			
+			initialize:function(_obj){
+				this.isInit = false;
 			},
 			render:function(_itemDataObj,_i){
 			
-				if(_itemDataObj){
+				if(_itemDataObj && _itemDataObj!=null){
 					this.itemDataObj = _itemDataObj;
 				}else{
 					_itemDataObj = this.itemDataObj;
@@ -49,30 +72,59 @@ $(function(){
 				if(!_itemDataObj.hero && !_arg.items){
 					throw new Error('arg obj is null');
 				}				
+				var o = this;
 				
-				var tempObj = {};
+				if(_i==0){
 				
-				var avatar   = _itemDataObj.hero.avatar;
-				var itemsObj = _itemDataObj.items[itemIn[_i]];
-				var i = 0;
-				for(var k in itemsObj){
-					if( isNaN(parseInt(k)) ){
-						tempObj['item'+(i++)] = itemsObj[k];
-					}
+					(function(){
+						
+						var tempObj = {};
+				
+						var name     = _itemDataObj.hero.name;
+						var avatar   = _itemDataObj.hero.avatar;
+						
+						var itemsObj = _itemDataObj.items[itemIn[_i]];
+						
+						var i = 0;
+
+						tempObj.hero_ident = o.heroIdent; 
+						tempObj.hero_avatar = avatar;
+						tempObj.hero_name   = name;
+						
+						for(var k in itemsObj){
+							if( isNaN(parseInt(k)) ){
+								tempObj['item'+(i++)]  = itemsObj[k];
+							}
+						}
+						
+						var items = _.template($("#hero_one_items").html(), tempObj);
+						$(o.el).append(items);
+						
+					}());
+
+				}else{
+					
+					(function(){
+						
+						var tempObj = {};
+						var itemsObj = _itemDataObj.items[itemIn[_i]];
+						
+						for(var k in itemsObj){
+							if( isNaN(parseInt(k)) ){
+								tempObj['item'+(i++)]  = itemsObj[k];
+							}
+						}	
+						
+						var items = _.template($('#'+o.heroIdent+' #items').html(),tempObj);
+						$('#'+o.heroIdent).html(items);
+						
+					}());
 				}
-				tempObj['heroAvatar'] = avatar;
-				
-				var t = _.template($("#hero_one").html(), tempObj);
-				
-				$(this.el).append(t);
-				
-				this.currentLevel = $('.upgrade_levels .selected')[0];
-				
-				console.log(tempObj);
 			}
 		});
 		
-		HeroView = HeroV;
+		ItemsView = itemsV;
+		LevelsView = LevelsV;
 	}());
 
 	function queryUpgrade(_avatars,_i){
@@ -91,15 +143,27 @@ $(function(){
 		if(sendData[0]=='{' && sendData[1]=='}'){
 			console.log('select none');
 		}else{
+
 			$.get('http://localhost/dotalegend/phps2/getHero.php?heroNamesJson='+sendData,function(_data,_info){
 
 				if(_info=='success'){
 					console.log(_data);
 					if(_data!=null && _data!=''){
+
+						var levelsV = new LevelsView({el:$('.query_window')});
+						//levelsV.allHeroesV = new Object();
+						//levelsV.$allLevels = $('.upgrade_levels');
+						levelsV.render();
+						
 						var returnDataObj = JSON.parse(_data);
+
 						for(var k in returnDataObj){
-							var h = new HeroView({el:$('.query_window')});
+							
+							var h = new ItemsView({el:'.query_window'});
+							h.heroIdent = k;
 							h.render(returnDataObj[k],_i);
+							
+							levelsV.add(k,h);
 						}
 					}
 				}else{
@@ -150,7 +214,7 @@ $(function(){
 			var data    = this.get('main').get('heroSelected');
 			
 			if(queryDoes[type]!=undefined){
-				
+				//清空
 				$window.html('');
 				var p = queryDoes[type].call(this,data,0);
 				

@@ -18,22 +18,31 @@
 	float: left;
 }
 .query .query_window .hero_one h4{
-	margin-top:2%;
 	margin-left:2%;
 	width:98%;
 	float: left;
 }
-.query .query_window .hero_one .hero_avatar{
+.query .query_window .hero_avatar{
+	margin-left:2%;
 	width:20%;
 	float: left;
 }
-.query .query_window .hero_one .hero_name{
-	background-color:#FF9393;
+.query .query_window .hero_avatar img{
+	border-radius: 2px;
+}
+.query .query_window .hero_name{
+	/*background-color:#FF9393;*/
 	margin-left:2.5%;
 	font-size:20px;
 	float: left;
 }
 .query .query_window .upgrade_levels{
+	margin-top:2%;
+	width:100%;
+	float: left;
+}
+.query .query_window .heroes_list{
+	margin-bottom: 2%;
 	width:100%;
 	float: left;
 }
@@ -48,6 +57,9 @@
 	height:45px;	
 	list-style:none;	
 	float: left;
+}
+.query .query_window .upgrade_level_one li img{
+	border-radius: 2px;
 }
 .query .query_window .upgrade_levels li{
 	background-color:#FFFFFF;
