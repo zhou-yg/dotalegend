@@ -26,16 +26,17 @@ $(function(){
 				$('.upgrade_levels .selected').removeClass('selected');
 				
 				for(var i=0;i<len;i++){
-
-					if($allLevels.children[i] == target){
+					
+					var c = $allLevels.children()[i];
+					
+					if( c == target){
 						ii = i;
 						break;
 					}
 				}
 				
-				console.log('i-ii',i,ii);
-				
 				for(var k in this.allHeroesV){
+					console.log(k);
 					this.allHeroesV[k].render(null,ii);
 				}
 				
@@ -73,7 +74,7 @@ $(function(){
 					throw new Error('arg obj is null');
 				}				
 				var o = this;
-				
+				//第一次加载模板
 				if(_i==0){
 				
 					(function(){
@@ -103,11 +104,19 @@ $(function(){
 					}());
 
 				}else{
-					
+					//后续的加载
 					(function(){
 						
 						var tempObj = {};
+						var name     = _itemDataObj.hero.name;
+						var avatar   = _itemDataObj.hero.avatar;
+
 						var itemsObj = _itemDataObj.items[itemIn[_i]];
+						var i = 0;
+
+						tempObj.hero_ident = o.heroIdent; 
+						tempObj.hero_avatar = avatar;
+						tempObj.hero_name   = name;
 						
 						for(var k in itemsObj){
 							if( isNaN(parseInt(k)) ){
@@ -115,7 +124,7 @@ $(function(){
 							}
 						}	
 						
-						var items = _.template($('#'+o.heroIdent+' #items').html(),tempObj);
+						var items = _.template($('#hero_one_items').html(),tempObj);
 						$('#'+o.heroIdent).html(items);
 						
 					}());
