@@ -88,7 +88,7 @@ $(function(){
 						
 						var i = 0;
 
-						tempObj.hero_ident = o.heroIdent; 
+						tempObj.hero_id = o.heroIdent; 
 						tempObj.hero_avatar = avatar;
 						tempObj.hero_name   = name;
 						
@@ -97,6 +97,8 @@ $(function(){
 								tempObj['item'+(i++)]  = itemsObj[k];
 							}
 						}
+
+						console.log(tempObj);
 						
 						var items = _.template($("#hero_one_items").html(), tempObj);
 						$(o.el).append(items);
@@ -114,7 +116,7 @@ $(function(){
 						var itemsObj = _itemDataObj.items[itemIn[_i]];
 						var i = 0;
 
-						tempObj.hero_ident = o.heroIdent; 
+						tempObj.hero_id = o.heroIdent; 
 						tempObj.hero_avatar = avatar;
 						tempObj.hero_name   = name;
 						
@@ -123,6 +125,8 @@ $(function(){
 								tempObj['item'+(i++)]  = itemsObj[k];
 							}
 						}	
+
+						console.log(tempObj);
 						
 						var items = _.template($('#hero_one_items').html(),tempObj);
 						$('#'+o.heroIdent).html(items);
@@ -153,10 +157,10 @@ $(function(){
 			console.log('select none');
 		}else{
 
-			$.get('http://localhost/dotalegend/phps2/getHero.php?heroNamesJson='+sendData,function(_data,_info){
+			dotalegendGet.getHero(sendData,function(_data,_result){
 
-				if(_info=='success'){
-					console.log(_data);
+				if(_result=='success'){
+
 					if(_data!=null && _data!=''){
 
 						var levelsV = new LevelsView({el:$('.query_window')});
@@ -164,7 +168,9 @@ $(function(){
 						//levelsV.$allLevels = $('.upgrade_levels');
 						levelsV.render();
 						
-						var returnDataObj = JSON.parse(_data);
+						var returnDataObj = _data;
+						
+						console.log(_data);
 
 						for(var k in returnDataObj){
 							

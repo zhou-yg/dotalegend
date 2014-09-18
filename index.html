@@ -9,6 +9,7 @@
 		<link rel="stylesheet" type="text/css" href="Public/css/query.css" />
 	</head>
 	<script src="Public/js/jquery2x.js"></script>
+	<script src="Js/oop/dget.js"></script>
 	<body>
 		<section class="main">
 			<h2 class="_title main_title">主界面</h2>
@@ -85,7 +86,7 @@
 			</ul>
 		</script>	
 		<script id="hero_one_items" type="text/template">	
-			<div id="<%= hero_ident %>" class="heroes_list">
+			<div id="<%= hero_id %>" class="heroes_list">
 				<h4>
 					<div class="hero_avatar">
 						<img src="<%= hero_avatar %>" width="100%"/>
@@ -104,21 +105,25 @@
 		</script>
 	</body>
 	<script>
-	var allWidth = $(window).width();
-	var allHeight = $(window).height();
+	var allWidth;
+	var allHeight;
+	var heroSelectedArr;
 
-	var heroSelectedArr = [];
-	//init
 	$(function(){
+		
+		allWidth = $(window).width();
+		allHeight = $(window).height();
+
+		heroSelectedArr = [];
+
 		$('body').height(allHeight);
 		$('.main').height(allHeight);
 		$('.setting').height(allHeight);;
 		$('.query').height(allHeight);
 	});
 	</script>
-	<script src="Public/js/underscore-min.js"></script>
+	<script src="Public/js/underscore.js"></script>
 	<script src="Public/js/backbone-min.js"></script>
-	<script src="Js/models/main.js"></script>
 	<script src="Js/models/main.js"></script>
 	<script src="Js/models/setting.js"></script>
 	<script src="Js/models/query.js"></script>

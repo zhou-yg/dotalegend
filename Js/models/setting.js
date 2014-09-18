@@ -24,11 +24,11 @@ $(function() {
 			var $set_upto = o.get('$set_upto');
 
 			var dfd = new $.Deferred();
-			$.get('http://localhost/dotalegend/phps2/getAllHeroes.php', function(_data, _result) {
+			dotalegendGet.getAllHeroes(function(_data, _result){
 
 				if (_result == 'success') {
-
-					var allHeroObj = JSON.parse(_data);
+					
+					var allHeroObj = _data;
 					
 					var isSelected  = false;
 					var selectedArr = new Array();
