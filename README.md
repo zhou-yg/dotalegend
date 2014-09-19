@@ -17,4 +17,3 @@ exampl:*http://dotalegend.sinaapp.com/phps2/getHero.php?heroNamesJson={"ho":"火
 
 
 api:http://dotalegend.sinaapp.com/phps2/getAllHeroes.php;
-
