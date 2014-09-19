@@ -53,8 +53,6 @@ $(function() {
 						var img = this.children[0];
 						var l   = img.parentElement;
 						
-						img = $(img);
-						
 						if (!l.style.backgroundColor || l.style.backgroundColor == '') {
 							selectedArr.push(img);
 							l.style.backgroundColor = '#7EE67E';

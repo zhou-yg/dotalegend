@@ -147,11 +147,10 @@ $(function(){
 		var iPre = 'h';
 		
 		for(var i=0;i<_avatars.length;i++){
-			var name = _avatars[i].attr('heroName');
+			var name = _avatars[i].getAttribute('heroName');
 			objs[iPre+i] = name;
 		}
 		sendData = JSON.stringify(objs);
-		console.log(sendData);
 		
 		if(sendData[0]=='{' && sendData[1]=='}'){
 			console.log('select none');
@@ -229,7 +228,6 @@ $(function(){
 			var data    = this.get('main').get('heroSelected');
 			
 			if(queryDoes[type]!=undefined){
-				//清空
 				$window.html('');
 				var p = queryDoes[type].call(this,data,0);
 				
