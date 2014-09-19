@@ -167,6 +167,7 @@ if($connectResult){
 	if(count($returnArr)==0){
 		echo 'the length of is 0';
 	}else{
+		header("Content-type: application/json");
 		echo json_encode($returnArr);
 	}
 	
