@@ -30,7 +30,7 @@ if($connectTo){
 			
 			$array = mysql_fetch_array($sqlOp->result);
 		}
-		
+		header("Content-type: application/json");
 		echo json_encode($heroArr);
 		
 	}else{
