@@ -25,6 +25,8 @@ $(function() {
 
 			var dfd = new $.Deferred();
 			dotalegendGet.getAllHeroes(function(_data, _result){
+				
+				console.log(_data,_result);
 
 				if (_result == 'success') {
 					

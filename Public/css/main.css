@@ -2,8 +2,8 @@
 	margin:0;
 	padding: 0;
 }
-body{
-	overflow: hidden;
+.vir_body{
+	overflow:hidden;
 }
 ._title{
 	width: 100%;

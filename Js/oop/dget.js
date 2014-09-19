@@ -1,7 +1,9 @@
+var serverHost = 'http://10.0.1.82:9000/dotalegend_git';
+
 var dotalegendGet = {
 	
 	getAllHeroes:function(_callBack){
-		$.get('http://localhost/dotalegend/phps2/getAllHeroes.php',function(_data,_result){
+		$.get(serverHost+'/dotalegend/phps2/getAllHeroes.php',function(_data,_result){
 
 			if(typeof _data == 'object'){
 
@@ -13,7 +15,7 @@ var dotalegendGet = {
 		});
 	},
 	getHero:function(_sendData,_callBack){
-		$.get('http://localhost/dotalegend/phps2/getHero.php?heroNamesJson='+_sendData,function(_data,_result){
+		$.get(serverHost+'/dotalegend/phps2/getHero.php?heroNamesJson='+_sendData,function(_data,_result){
 
 			if(typeof _data == 'object'){
 

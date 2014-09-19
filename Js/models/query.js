@@ -88,7 +88,7 @@ $(function(){
 						
 						var i = 0;
 
-						tempObj.hero_id = o.heroIdent; 
+						tempObj.hero_ident = o.heroIdent; 
 						tempObj.hero_avatar = avatar;
 						tempObj.hero_name   = name;
 						
