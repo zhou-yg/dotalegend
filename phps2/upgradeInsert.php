@@ -77,7 +77,7 @@ if($connectResult){
 			}
 			echo "<span style='color:red;'>$hi</span> : ";
 			print_r($equipIdArr);
-			//print_r($equipArr);
+			print_r($equipArr);
 			
 			$upGradeArr;
 			$upGradeChildArr;
@@ -95,18 +95,23 @@ if($connectResult){
 					$upGradeChildArr[$ii] = $equipIdArr[$eii];
 				}
 				if($eii == $equipIdArrLen-1){
-					$upGradeArr[$i] = $upGradeChildArr;
+
+					$last = $equipArrLen%6;
 					
+					if($last){
+						$upGradeChildArr[$last] = null;
+					}
+					$upGradeArr[$i] = $upGradeChildArr;
 				}
 			}
 			
 			$upGradeArrLen = count($upGradeArr);
 			for ($ui=0; $ui < $upGradeArrLen; $ui++) {
+				echo '等级'.$ui.': ';
 				print_r($upGradeArr[$ui]);
 				echo "<br>"; 
 				$upGradeArr[$ui] = serialize($upGradeArr[$ui]);
 			}
-			
 			
 			$insertGradeStr = "insert into upgrade values(null,$hi";
 			for ($ui=0; $ui < $upGradeArrLen; $ui++) { 
@@ -122,6 +127,7 @@ if($connectResult){
 			}else{
 				echo "$hi gradeInsertResult fail".'<br>';
 			}
+			
 		}else{
 			echo "$hi search find 0".'<br>';
 		}

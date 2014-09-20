@@ -20,6 +20,6 @@ $a = array();
 
 $a['aa'] = 1234;
 
-print_r($a);
+print_r($a[0]);
 
 ?>

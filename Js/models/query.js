@@ -6,8 +6,6 @@ $(function(){
 			
 			initialize:function(){
 				this.allHeroesV = new Object();
-						
-				console.log('levelsV init');
 			},
 			events : {
 				'click li[type=level]':'doSelect'
@@ -36,7 +34,6 @@ $(function(){
 				}
 				
 				for(var k in this.allHeroesV){
-					console.log(k);
 					this.allHeroesV[k].render(null,ii);
 				}
 				
@@ -59,6 +56,10 @@ $(function(){
 			initialize:function(_obj){
 				this.isInit = false;
 			},
+			createItemImg:function(_src){
+				return '<img src='+_src+' width="100%">';
+			}
+			,
 			render:function(_itemDataObj,_i){
 			
 				if(_itemDataObj && _itemDataObj!=null){
@@ -74,65 +75,48 @@ $(function(){
 					throw new Error('arg obj is null');
 				}				
 				var o = this;
-				//第一次加载模板
-				if(_i==0){
 				
-					(function(){
-						
-						var tempObj = {};
-				
-						var name     = _itemDataObj.hero.name;
-						var avatar   = _itemDataObj.hero.avatar;
-						
-						var itemsObj = _itemDataObj.items[itemIn[_i]];
-						
-						var i = 0;
+				(function(){
 
-						tempObj.hero_id = o.heroIdent; 
-						tempObj.hero_avatar = avatar;
-						tempObj.hero_name   = name;
+					var tempObj = {};
+				
+					var name     = _itemDataObj.hero.name;
+					var avatar   = _itemDataObj.hero.avatar;
+
+					var itemsObj;
+					
+					var i = 0;
+					
+					if(_i==-1){
+						//第一次加载模板
+						container = $(o.el);
+						itemsObj = _itemDataObj.items[itemIn[_i+1]];
+
+					}else{
+						//后续的加载
+						container = $('#'+o.heroIdent);
+						itemsObj = _itemDataObj.items[itemIn[_i]];
+					}
+					
+
+					tempObj.hero_id = o.heroIdent; 
+					tempObj.hero_avatar = avatar;
+					tempObj.hero_name   = name;
 						
-						for(var k in itemsObj){
-							if( isNaN(parseInt(k)) ){
-								tempObj['item'+(i++)]  = itemsObj[k];
-							}
+					for(var k in itemsObj){
+						if( isNaN(parseInt(k)) ){
+							tempObj['item'+(i++)]  = itemsObj[k]?o.createItemImg(itemsObj[k]):null;
 						}
+					}
 
-						console.log(tempObj);
-						
-						var items = _.template($("#hero_one_items").html(), tempObj);
+					var items = _.template($("#hero_one_items").html(), tempObj);					
+					
+					if(_i==-1){
 						$(o.el).append(items);
-						
-					}());
-
-				}else{
-					//后续的加载
-					(function(){
-						
-						var tempObj = {};
-						var name     = _itemDataObj.hero.name;
-						var avatar   = _itemDataObj.hero.avatar;
-
-						var itemsObj = _itemDataObj.items[itemIn[_i]];
-						var i = 0;
-
-						tempObj.hero_id = o.heroIdent; 
-						tempObj.hero_avatar = avatar;
-						tempObj.hero_name   = name;
-						
-						for(var k in itemsObj){
-							if( isNaN(parseInt(k)) ){
-								tempObj['item'+(i++)]  = itemsObj[k];
-							}
-						}	
-
-						console.log(tempObj);
-						
-						var items = _.template($('#hero_one_items').html(),tempObj);
+					}else{
 						$('#'+o.heroIdent).html(items);
-						
-					}());
-				}
+					}
+				}());
 			}
 		});
 		
@@ -147,31 +131,28 @@ $(function(){
 		var iPre = 'h';
 		
 		for(var i=0;i<_avatars.length;i++){
-			var name = _avatars[i].attr('heroName');
+			var name = _avatars[i].getAttribute('heroName');
 			objs[iPre+i] = name;
 		}
 		sendData = JSON.stringify(objs);
-		console.log(sendData);
 		
 		if(sendData[0]=='{' && sendData[1]=='}'){
-			console.log('select none');
+			throw new Error('select none');
 		}else{
-
+			//进阶等级选择
+			var levelsV = new LevelsView({el:$('.query_window')});
+			levelsV.render();
+			
 			dotalegendGet.getHero(sendData,function(_data,_result){
 
 				if(_result=='success'){
 
 					if(_data!=null && _data!=''){
 
-						var levelsV = new LevelsView({el:$('.query_window')});
-						//levelsV.allHeroesV = new Object();
-						//levelsV.$allLevels = $('.upgrade_levels');
-						levelsV.render();
-						
+						$('.upgrade_levels .heroes_loading').hide();
+
 						var returnDataObj = _data;
 						
-						console.log(_data);
-
 						for(var k in returnDataObj){
 							
 							var h = new ItemsView({el:'.query_window'});
@@ -182,7 +163,7 @@ $(function(){
 						}
 					}
 				}else{
-					console.log('queryUpgrade fail');
+					throw new Error('queryUpgrade fail');
 				}
 			});
 		}
@@ -215,8 +196,6 @@ $(function(){
 			
 			$window.height($obj.height() - $objTitle.height() - $leftto.height());
 			
-			console.log($obj.height(),$objTitle.height(),$leftto.height());
-			
 			$leftto.click(function(){
 				o.hide();
 			});
@@ -231,7 +210,7 @@ $(function(){
 			if(queryDoes[type]!=undefined){
 				//清空
 				$window.html('');
-				var p = queryDoes[type].call(this,data,0);
+				var p = queryDoes[type].call(this,data,-1);
 				
 			}else{
 				throw new Error('queryDoes this type is null');
@@ -268,5 +247,5 @@ $(function(){
 		},
 	});
 	var q = new Query();
-	mainModelObj.add(q,'.ops_test','upgrade');
+	mainModelObj.add(q,'.ops_equipment','upgrade');
 });

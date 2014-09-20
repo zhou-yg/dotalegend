@@ -51,7 +51,6 @@
 	float: left;
 }
 .query .query_window .upgrade_level_one li{
-	background-color: #EAF786;
 	margin:0 1% 1% 1%;
 	width:14.6%;
 	height:45px;	
@@ -79,10 +78,19 @@
 .query .query_window .upgrade_levels li.selected{
 	background-color: #78A2E1;
 }
-
+.query .query_window .upgrade_levels .heroes_loading{
+	background-image:url(../image/loading.GIF);
+	background-size:20% 100%;
+	background-position:50%;
+	background-repeat: no-repeat;
+	margin-top:25%;
+	width:100%;
+	padding-top: 20%;
+	float: left;
+}
 .query .leftto{
 	background-color: #FF9393;
-	background-image:url(../image/cancel.png);
+	background-image:url(../image/left.png);
 	background-position:center;
 	background-repeat:no-repeat;
 	background-size:30px 30px;

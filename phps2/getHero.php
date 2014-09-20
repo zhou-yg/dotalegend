@@ -106,6 +106,10 @@ if($connectResult){
 							for ($j=0; $j < $len; $j++) { 
 							
 								$itemId = $arr[$i][$j];
+								
+								if($itemId==null){
+									break;
+								}
 							
 								$queryItemResult = $sqlOp->queryTo("select * from items where id=$itemId ");
 								if($queryItemResult){

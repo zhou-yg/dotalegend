@@ -17,7 +17,6 @@
 			<div class="window_ops">
 				<p class="ops_one ops_gold">金币</p>
 				<p class="ops_one ops_equipment">进阶装备</p>
-				<p class="ops_one ops_test">测试</p>
 			</div>
 			<p class="ops_one ops_setting">+</p>
 		</section>
@@ -33,10 +32,10 @@
 			<h2 class="_title query_title">英雄进阶</h2>
 			<div class="query_window">
 				<!--
-				<ul class="upgrade_levels">
-					<li type="level">白</li>
+					<ul class="upgrade_levels">
+					<li class="selected" type="level">白</li>
 					<li type="level">绿</li>
-					<li class="selected" type="level">绿+1</li>
+					<li type="level">绿+1</li>
 					<li type="level">蓝</li>
 					<li type="level">蓝+1</li>
 					<li type="level">蓝+2</li>
@@ -46,6 +45,7 @@
 					<li type="level">紫+3</li>
 					<li type="level">紫+4</li>
 					<li type="level">橙</li>
+					<p class="heroes_loading"></p>
 				</ul>
 				<div class="heroes_list">
 					<div class="hero_one">
@@ -56,12 +56,12 @@
 							<span class="hero_name">Name</span>
 						</h4>
 						<ul class="upgrade_level_one">
-							<li></li>
-							<li></li>
-							<li></li>
-							<li></li>
-							<li></li>
-							<li></li>
+							<li><img src="<%= item0 %>" width="100%"></li>
+							<li><img src="<%= item0 %>" width="100%"></li>
+							<li><img src="<%= item0 %>" width="100%"></li>
+							<li><img src="<%= item0 %>" width="100%"></li>
+							<li><img src="<%= item0 %>" width="100%"></li>
+							<li><img src="<%= item0 %>" width="100%"></li>
 						</ul>
 					</div>
 				</div>
@@ -83,6 +83,7 @@
 				<li type="level">紫+3</li>
 				<li type="level">紫+4</li>
 				<li type="level">橙</li>
+				<p class="heroes_loading"></p>
 			</ul>
 		</script>	
 		<script id="hero_one_items" type="text/template">	
@@ -94,12 +95,12 @@
 					<span class="hero_name"><%= hero_name %></span>
 				</h4>
 				<ul id="items" class="upgrade_level_one" >
-					<li><img src="<%= item0 %>" width="100%"></li>
-					<li><img src="<%= item1 %>" width="100%"></li>
-					<li><img src="<%= item2 %>" width="100%"></li>
-					<li><img src="<%= item3 %>" width="100%"></li>
-					<li><img src="<%= item4 %>" width="100%"></li>
-					<li><img src="<%= item5 %>" width="100%"></li>
+					<li><%= item0 %></li>
+					<li><%= item1 %></li>
+					<li><%= item2 %></li>
+					<li><%= item3 %></li>
+					<li><%= item4 %></li>
+					<li><%= item5 %></li>
 				</ul>
 			</div>
 		</script>
