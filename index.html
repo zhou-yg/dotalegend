@@ -11,6 +11,7 @@
 	<script src="Public/js/jquery2x.js"></script>
 	<script src="Js/oop/dget.js"></script>
 	<body>
+		<div class="vir_body">
 		<section class="main">
 			<h2 class="_title main_title">主界面</h2>
 			<hr />
@@ -69,6 +70,7 @@
 			</div>
 			<p class="query_one leftto">←</p>
 		</aside>
+		</div>
 		<script id="all_levels" type="text/template">
 			<ul class="upgrade_levels">
 				<li class="selected" type="level">白</li>
@@ -87,7 +89,7 @@
 			</ul>
 		</script>	
 		<script id="hero_one_items" type="text/template">	
-			<div id="<%= hero_id %>" class="heroes_list">
+			<div id="<%= hero_ident %>" class="heroes_list">
 				<h4>
 					<div class="hero_avatar">
 						<img src="<%= hero_avatar %>" width="100%"/>
@@ -117,13 +119,14 @@
 
 		heroSelectedArr = [];
 
-		$('body').height(allHeight);
+		$('.vir_body').height(allHeight);
+
 		$('.main').height(allHeight);
 		$('.setting').height(allHeight);;
 		$('.query').height(allHeight);
 	});
 	</script>
-	<script src="Public/js/underscore.js"></script>
+	<script src="Public/js/underscore-min-old.js"></script>
 	<script src="Public/js/backbone-min.js"></script>
 	<script src="Js/models/main.js"></script>
 	<script src="Js/models/setting.js"></script>

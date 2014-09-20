@@ -99,9 +99,9 @@ $(function(){
 					}
 					
 
-					tempObj.hero_id = o.heroIdent; 
-					tempObj.hero_avatar = avatar;
-					tempObj.hero_name   = name;
+						tempObj.hero_ident = o.heroIdent; 
+						tempObj.hero_avatar = avatar;
+						tempObj.hero_name   = name;
 						
 					for(var k in itemsObj){
 						if( isNaN(parseInt(k)) ){
@@ -208,7 +208,6 @@ $(function(){
 			var data    = this.get('main').get('heroSelected');
 			
 			if(queryDoes[type]!=undefined){
-				//清空
 				$window.html('');
 				var p = queryDoes[type].call(this,data,-1);
 				
