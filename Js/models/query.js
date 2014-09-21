@@ -1,6 +1,7 @@
 $(function(){
 	var LevelsView,ItemsView;
 	var itemIn = ['w','g','g1','b','b1','b2','p','p1','p2','p3','p4','o'];
+	//进阶的查询
 	(function(){
 		var LevelsV = Backbone.View.extend({
 			
@@ -123,7 +124,11 @@ $(function(){
 		ItemsView = itemsV;
 		LevelsView = LevelsV;
 	}());
-
+	//技能的查询
+	(function(){
+		
+	}());
+	
 	function queryUpgrade(_avatars,_i){
 		
 		var sendData;
@@ -168,9 +173,13 @@ $(function(){
 			});
 		}
 	}
+	function goldPlus(){
+		
+	};
 	
 	var queryDoes = {
-		upgrade:queryUpgrade
+		upgrade:queryUpgrade,
+		goldplus:goldPlus
 	};
 	
 	var Query = Backbone.Model.extend({
@@ -247,4 +256,5 @@ $(function(){
 	});
 	var q = new Query();
 	mainModelObj.add(q,'.ops_equipment','upgrade');
+	mainModelObj.add(q,'.ops_gold','goldplus');
 });
