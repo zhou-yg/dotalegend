@@ -1,4 +1,4 @@
-var serverHost = 'http://10.0.1.82:9000/dotalegend_git/dotalegend';
+var serverHost = 'http://localhost/dotalegend';
 
 var dotalegendGet = {
 	
