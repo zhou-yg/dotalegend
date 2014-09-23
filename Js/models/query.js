@@ -1,7 +1,7 @@
 $(function(){
-	var LevelsView,ItemsView;
+	var LevelsView,ItemsView,GoldView;
 	var itemIn = ['w','g','g1','b','b1','b2','p','p1','p2','p3','p4','o'];
-	//进阶的查询
+	//进阶的查询View
 	(function(){
 		var LevelsV = Backbone.View.extend({
 			
@@ -98,11 +98,10 @@ $(function(){
 						container = $('#'+o.heroIdent);
 						itemsObj = _itemDataObj.items[itemIn[_i]];
 					}
-					
 
-						tempObj.hero_ident = o.heroIdent; 
-						tempObj.hero_avatar = avatar;
-						tempObj.hero_name   = name;
+					tempObj.hero_ident = o.heroIdent; 
+					tempObj.hero_avatar = avatar;
+					tempObj.hero_name   = name;
 						
 					for(var k in itemsObj){
 						if( isNaN(parseInt(k)) ){
@@ -124,19 +123,36 @@ $(function(){
 		ItemsView = itemsV;
 		LevelsView = LevelsV;
 	}());
-	//技能的查询
+	//金币的查询View
 	(function(){
+		
+		var GoldView = Backbone.View.extend({
+			initialize:function(){
+				
+			},
+			events : {
+				
+			},
+			render : function(){
+
+				$(this.el).html($('#all_levels').html());
+
+				this.currentLi = $('.upgrade_levels').children()[0];
+			}				
+		});
 		
 	}());
 	
-	function queryUpgrade(_avatars,_i){
+	function queryUpgrade(_selectedHeroes,_i){
 		
 		var sendData;
 		var objs =  {};
 		var iPre = 'h';
 		
-		for(var i=0;i<_avatars.length;i++){
-			var name = _avatars[i].getAttribute('heroName');
+		$('.query .query_title').text('英雄进阶');
+		
+		for(var i=0;i<_selectedHeroes.length;i++){
+			var name = _selectedHeroes[i].getAttribute('heroName');
 			objs[iPre+i] = name;
 		}
 		sendData = JSON.stringify(objs);
@@ -173,7 +189,9 @@ $(function(){
 			});
 		}
 	}
-	function goldPlus(){
+	function goldPlus(_heroes,_i){
+
+		$('.query .query_title').text('金币');
 		
 	};
 	

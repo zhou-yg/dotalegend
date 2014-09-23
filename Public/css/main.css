@@ -40,7 +40,10 @@
 	cursor: default;
 }
 .main .window_ops .ops_gold{
-	background-color:#EAF786;
+	background-color:#F0E383;
+}
+.main .window_ops .ops_gold:active{
+	background-color:#F2DA2D;
 }
 .main .window_ops .ops_equipment{
 	background-color: #FFB5A1;

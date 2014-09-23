@@ -35,7 +35,23 @@
 		<aside class="query">
 			<h2 class="_title query_title">英雄进阶</h2>
 			<div class="query_window">
+				<h3>当前有<span>3</span>个技能</h3>
+				
+				<p class="ability_one">
+					<a class="ability_one_reduce" href="javascript:"></a>
+					<span class="ability_one_bar">
+						<span class="hr"></span>
+						<span class="ability_one_bar_button">0</span>
+					</span>
+					<a class="ability_one_plus"  href="javascript:"></a>
+				</p>
 				<!--
+					<span class="ability_one_plus">-</span>
+					<p class="ability_one_bar">
+						<span class="ability_one_bar_button"> </span>
+					</p>
+					<span class="ability_one_reduce">+</span>
+
 					<ul class="upgrade_levels">
 					<li class="selected" type="level">白</li>
 					<li type="level">绿</li>
@@ -108,6 +124,16 @@
 					<li><%= item5 %></li>
 				</ul>
 			</div>
+		</script>
+		<script id="hero_ability_one" type="text/template">
+				<p class="ability_one">
+					<a class="ability_one_reduce" href="javascript:"></a>
+					<span class="ability_one_bar">
+						<span class="hr"></span>
+						<span class="ability_one_bar_button"><%= ability_level %></span>
+					</span>
+					<a class="ability_one_plus"  href="javascript:"></a>
+				</p>			
 		</script>
 	</body>
 	<script>
