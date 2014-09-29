@@ -147,6 +147,8 @@
 	
 	position: relative;
 	top:-75%;
+	
+	cursor: default;
 }
 
 .query .leftto{

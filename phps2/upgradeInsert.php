@@ -7,7 +7,7 @@ $num = count($heroNames);
 $connectResult = $sqlOp->connectTo();
 
 if($connectResult){
-	for ($hi=0; $hi < $num; $hi++) { 
+	for ($hi=1; $hi <= $num; $hi++) { 
 	
 		$heroName = $heroNames[$hi];
 		
@@ -75,7 +75,7 @@ if($connectResult){
 						echo '$hi isEquipExistedResult fail'.'<br>';
 					}
 			}
-			echo "<span style='color:red;'>$hi</span> : ";
+			echo "<span style='color:red;'>$hi -  ".$heroNames[$hi-1]."</span> : ";
 			print_r($equipIdArr);
 			print_r($equipArr);
 			
