@@ -135,12 +135,9 @@ $(function(){
 			},
 			render : function(){
 
-				$(this.el).html($('#all_levels').html());
-
-				this.currentLi = $('.upgrade_levels').children()[0];
+				$(this.el).html($('#hero_ability_one').html());
 			}				
 		});
-		
 	}());
 	
 	function queryUpgrade(_selectedHeroes,_i){
@@ -193,6 +190,9 @@ $(function(){
 
 		$('.query .query_title').text('金币');
 		
+		for(var i=0;i<heroes.length;i++){
+			
+		}
 	};
 	
 	var queryDoes = {
@@ -254,10 +254,6 @@ $(function(){
 			p = $Obj.animate({
 				left:toLeft
 			},1000).promise();
-			
-			p.done(function(){
-				
-			});
 			
 			this.queryData();
 		},
