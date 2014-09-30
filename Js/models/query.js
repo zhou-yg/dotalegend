@@ -1,5 +1,6 @@
 $(function(){
-	var LevelsView,ItemsView,GoldView;
+	var LevelsView,ItemsView;
+	var GoldView,AdjustAction;
 	var itemIn = ['w','g','g1','b','b1','b2','p','p1','p2','p3','p4','o'];
 	//进阶的查询View
 	(function(){
@@ -125,19 +126,80 @@ $(function(){
 	}());
 	//金币的查询View
 	(function(){
-		
-		var GoldView = Backbone.View.extend({
+
+		var GoldV = Backbone.View.extend({
 			initialize:function(){
 				
 			},
 			events : {
-				
+				"mousemove .ability_one_bar_button":'moveBtn'
 			},
-			render : function(){
-
-				$(this.el).html($('#hero_ability_one').html());
+			moveBtn:function(){
+				console.log('move');
+			}
+			,
+			render : function(_i){
+				var temp;
+				
+				if(_i==0){
+					temp = _.template($("#hero_ability_header").html(), {ability_nums:this.nums});
+					$(this.el).append(temp);
+				}
+				temp = _.template($("#hero_ability_one").html(), {ability_id:'a'+_i});
+				$(this.el).append(temp);
 			}				
 		});
+		var AdjustAbilityR = Backbone.Router.extend({
+			initialize:function(){
+				
+				
+			},
+			routes:{
+				'ability/:id/:dir':'clickOn'
+			},
+			clickOn:function(_id,_dir){
+
+				var btn = $('#'+_id+' '+'.ability_one_bar_button');
+				
+				if(_dir==='plus'){
+					this.abilityAdjust(btn,1);
+				}
+				if(_dir==='reduce'){
+					this.abilityAdjust(btn,-1);
+				}
+			},
+			goldCollect:function(){
+				
+			}
+			,
+			abilityAdjust:function(_btn,_direction){
+				
+				var btnWidth = _btn.width();
+				var barWidth = $(_btn.parents()[0]).width();
+				var left = _btn.css('left').substring(0,_btn.css('left').length-2);
+
+				if(_direction==1){
+					if(left+btnWidth<barWidth){
+						var singleWidth = (barWidth-btnWidth)/90;
+						_btn.css('left','+='+singleWidth+'px');
+						_btn.text(parseInt(_btn.text())+1);
+					}
+				}
+				if(_direction==-1){
+					if(left>0){
+						var singleWidth = (barWidth-btnWidth)/90;
+						_btn.css('left','-='+singleWidth+'px');
+						_btn.text(parseInt(_btn.text())-1);
+					}
+				}
+				
+				location.href = location.href+'#';
+			}
+		});
+		
+		AdjustAction = AdjustAbilityR;
+		GoldView = GoldV;
+		
 	}());
 	
 	function queryUpgrade(_selectedHeroes,_i){
@@ -190,10 +252,22 @@ $(function(){
 
 		$('.query .query_title').text('金币');
 		
-		for(var i=0;i<heroes.length;i++){
+		for(var i=0,len=_heroes.length;i<len;i++){
 			
+			var abilityOne = new GoldView({el:'.query_window'});
+			if(i==0){
+				abilityOne.nums = len;
+			}
+			abilityOne.render(i);
 		}
+		
+		$('.query_window h3 span').text(len);
+		
+		var aa = new AdjustAction();
+		Backbone.history.start();
+		
 	};
+	goldPlus([1,2,3]);
 	
 	var queryDoes = {
 		upgrade:queryUpgrade,

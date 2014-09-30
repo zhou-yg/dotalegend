@@ -35,16 +35,25 @@
 		<aside class="query">
 			<h2 class="_title query_title">x</h2>
 			<div class="query_window">
-				<h3>当前有<span>a</span>个</h3>
-				
-				<p class="ability_one">
-					<a class="ability_one_reduce" href="javascript:"></a>
+				<!--
+				<h3>当前有<span>3</span>个技能</h3>
+				<p id="a1" class="ability_one">
+					<a class="ability_one_reduce" href="#ability/a1/reduce"></a>
 					<span class="ability_one_bar">
 						<span class="hr"></span>
 						<span class="ability_one_bar_button">0</span>
 					</span>
-					<a class="ability_one_plus"  href="javascript:"></a>
+					<a class="ability_one_plus"  href="#ability/a1/plus"></a>
 				</p>
+				<p id="a2" class="ability_one">
+					<a class="ability_one_reduce" href="#ability/a2/reduce"></a>
+					<span class="ability_one_bar">
+						<span class="hr"></span>
+						<span class="ability_one_bar_button">0</span>
+					</span>
+					<a class="ability_one_plus"  href="#ability/a2/plus"></a>
+				</p>
+				-->
 				<!--
 					<span class="ability_one_plus">-</span>
 					<p class="ability_one_bar">
@@ -125,15 +134,18 @@
 				</ul>
 			</div>
 		</script>
+		<script id="hero_ability_header" type="text/template">
+			<h3>当前有<span><%= ability_nums %></span>个技能</h3>
+		</script>
 		<script id="hero_ability_one" type="text/template">
-				<p class="ability_one">
-					<a class="ability_one_reduce" href="javascript:"></a>
-					<span class="ability_one_bar">
-						<span class="hr"></span>
-						<span class="ability_one_bar_button"><%= ability_level %></span>
-					</span>
-					<a class="ability_one_plus"  href="javascript:"></a>
-				</p>			
+			<p id="<%= ability_id %>" class="ability_one">
+				<a class="ability_one_reduce" href="#ability/<%= ability_id %>/reduce"></a>
+				<span class="ability_one_bar">
+					<span class="hr"></span>
+					<span class="ability_one_bar_button">0</span>
+				</span>
+				<a class="ability_one_plus" href="#ability/<%= ability_id %>/plus" ></a>
+			</p>			
 		</script>
 	</body>
 	<script>
