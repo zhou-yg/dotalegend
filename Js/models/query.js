@@ -129,23 +129,77 @@ $(function(){
 
 		var GoldV = Backbone.View.extend({
 			initialize:function(){
-				
 			},
 			events : {
-				"mousemove .ability_one_bar_button":'moveBtn'
+				'mousedown .ability_one_bar,.ability_one_bar_button':'downBtn',
+				'mousemove .ability_one_bar,.ability_one_bar_button':'moveBtn',
 			},
-			moveBtn:function(){
-				console.log('move');
-			}
-			,
+			downBtn:function(_e){
+				if(this.contaienrId === _e.target.parentNode.id ){
+					console.log('down');
+
+					this.preX = _e.pageX - this.barLeft;
+					
+					this.isDown = true;
+				}
+			},
+			moveBtn:function(_e){
+				
+				if( this.contaienrId === _e.target.parentNode.id && this.isDown ){
+					
+					console.log('move 1');
+					
+					var currentX = _e.pageX - this.barLeft;
+
+					var $btn = $(_e.target.children[1]);
+
+					var btnW = $btn.width();
+					var barW = $(_e.target).width();
+					
+					var singleWidth = (barW-btnW)/90;
+					
+					var lvlNum = parseInt(currentX/singleWidth);
+					var btnX   = lvlNum*singleWidth;
+					
+					if(lvlNum<=90){
+						
+						$btn.text(lvlNum);
+						$btn.css('left',btnX);
+					}
+					
+				}else if(this.contaienrId === _e.target.parentNode.parentNode.id && this.isDown){
+					console.log('move 2');
+
+					var currentX = _e.pageX - this.barLeft;
+
+					var $btn = $(_e.target);
+
+					var btnW = $btn.width();
+					var barW = $(_e.target.parentNode).width();
+					
+					var singleWidth = (barW-btnW)/90;
+					
+					var lvlNum = parseInt(currentX/singleWidth);
+					var btnX   = lvlNum*singleWidth;
+					
+					if(lvlNum<=90){
+						
+						$btn.text(lvlNum);
+						$btn.css('left',btnX);
+					}
+				}
+			},
 			render : function(_i){
 				var temp;
+				var id = 'a'+_i;
+				
+				this.contaienrId = id;
 				
 				if(_i==0){
 					temp = _.template($("#hero_ability_header").html(), {ability_nums:this.nums});
 					$(this.el).append(temp);
 				}
-				temp = _.template($("#hero_ability_one").html(), {ability_id:'a'+_i});
+				temp = _.template($("#hero_ability_one").html(), {ability_id:id});
 				$(this.el).append(temp);
 			}				
 		});
@@ -174,20 +228,19 @@ $(function(){
 			,
 			abilityAdjust:function(_btn,_direction){
 				
-				var btnWidth = _btn.width();
-				var barWidth = $(_btn.parents()[0]).width();
-				var left = _btn.css('left').substring(0,_btn.css('left').length-2);
+				var btnW = _btn.width();
+				var barW = $(_btn.parents()[0]).width();
+				var left = parseInt(_btn.css('left').substring(0,_btn.css('left').length-2));
+				var singleWidth = (barW-btnW)/90;
 
 				if(_direction==1){
-					if(left+btnWidth<barWidth){
-						var singleWidth = (barWidth-btnWidth)/90;
+					if(left+btnW<barW){
 						_btn.css('left','+='+singleWidth+'px');
 						_btn.text(parseInt(_btn.text())+1);
 					}
 				}
 				if(_direction==-1){
 					if(left>0){
-						var singleWidth = (barWidth-btnWidth)/90;
 						_btn.css('left','-='+singleWidth+'px');
 						_btn.text(parseInt(_btn.text())-1);
 					}
@@ -249,6 +302,8 @@ $(function(){
 	}
 	function goldPlus(_heroes,_i){
 
+		var goldBars = [];
+
 		$('.query .query_title').text('金币');
 		
 		for(var i=0,len=_heroes.length;i<len;i++){
@@ -257,8 +312,18 @@ $(function(){
 			if(i==0){
 				abilityOne.nums = len;
 			}
+			
 			abilityOne.render(i);
+			abilityOne.barLeft = $('.ability_one_bar').offset().left;
+			
+			goldBars.push(abilityOne);
 		}
+		
+		$('.query').on('mouseup',function(){
+			goldBars.forEach(function(_el){
+				_el.isDown = false;
+			});
+		});
 		
 		$('.query_window h3 span').text(len);
 		
