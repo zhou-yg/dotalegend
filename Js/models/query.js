@@ -252,6 +252,7 @@ $(function(){
 		
 		AdjustAction = AdjustAbilityR;
 		GoldView = GoldV;
+		
 	}());
 	
 	function queryUpgrade(_selectedHeroes,_i){
@@ -329,6 +330,7 @@ $(function(){
 		
 		var aa = new AdjustAction();
 		Backbone.history.start();
+		
 	};
 	goldPlus([1,2,3]);
 	
@@ -391,10 +393,6 @@ $(function(){
 			p = $Obj.animate({
 				left:toLeft
 			},1000).promise();
-			
-			p.done(function(){
-				
-			});
 			
 			this.queryData();
 		},
