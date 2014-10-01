@@ -135,7 +135,7 @@ $(function(){
 				'mousemove .ability_one_bar,.ability_one_bar_button':'moveBtn',
 			},
 			downBtn:function(_e){
-				if(this.contaienrId === _e.target.parentNode.id ){
+				if(this.contaienrId === _e.target.parentNode.id || this.contaienrId === _e.target.parentNode.parentNode.id){
 					console.log('down');
 
 					this.preX = _e.pageX - this.barLeft;
@@ -147,48 +147,49 @@ $(function(){
 				
 				if( this.contaienrId === _e.target.parentNode.id && this.isDown ){
 					
-					console.log('move 1');
-					
 					var currentX = _e.pageX - this.barLeft;
 
-					var $btn = $(_e.target.children[1]);
-
-					var btnW = $btn.width();
-					var barW = $(_e.target).width();
-					
-					var singleWidth = (barW-btnW)/90;
-					
-					var lvlNum = parseInt(currentX/singleWidth);
-					var btnX   = lvlNum*singleWidth;
-					
-					if(lvlNum<=90){
-						
-						$btn.text(lvlNum);
-						$btn.css('left',btnX);
+					if(!this.$btn){
+						this.$btn = $(_e.target.children[1]);
 					}
-					
+
+					this.goTolvl(currentX);
+				
 				}else if(this.contaienrId === _e.target.parentNode.parentNode.id && this.isDown){
-					console.log('move 2');
 
 					var currentX = _e.pageX - this.barLeft;
 
-					var $btn = $(_e.target);
-
-					var btnW = $btn.width();
-					var barW = $(_e.target.parentNode).width();
-					
-					var singleWidth = (barW-btnW)/90;
-					
-					var lvlNum = parseInt(currentX/singleWidth);
-					var btnX   = lvlNum*singleWidth;
-					
-					if(lvlNum<=90){
-						
-						$btn.text(lvlNum);
-						$btn.css('left',btnX);
+					if(!this.$btn){
+						this.$btn = $(_e.target);
 					}
+					this.goTolvl(currentX);
 				}
 			},
+			goTolvl:function(_currentX,_lvl){
+				
+				if(!this.singleWidth){
+					
+					var btnW = this.$btn.width();
+					var barW = $(this.$btn.parents()[0]).width();
+					
+					this.singleWidth = (barW-btnW)/90;
+				}
+				var lvlNum,btnX;
+
+				if(_lvl){
+					lvlNum = _lvl;
+				}else{
+					lvlNum = parseInt(_currentX/this.singleWidth);
+				}
+				btnX   = lvlNum*this.singleWidth;
+
+				if(lvlNum<=90){
+					
+					this.$btn.text(lvlNum);
+					this.$btn.css('left',btnX);
+				}
+			}
+			,
 			render : function(_i){
 				var temp;
 				var id = 'a'+_i;
@@ -205,8 +206,6 @@ $(function(){
 		});
 		var AdjustAbilityR = Backbone.Router.extend({
 			initialize:function(){
-				
-				
 			},
 			routes:{
 				'ability/:id/:dir':'clickOn'
@@ -332,7 +331,7 @@ $(function(){
 		Backbone.history.start();
 		
 	};
-	goldPlus([1,2,3]);
+	//goldPlus([1,2,3]);
 	
 	var queryDoes = {
 		upgrade:queryUpgrade,

@@ -93,6 +93,37 @@
 .query .query_window h3{
 	margin: 5px;
 	font-weight: bold;
+	position: relative;
+}
+.query .query_window .gold_ops{
+	background-color:#999;
+	margin:5px 0;
+	width: 100%;
+}
+.query .query_window .gold_ops li{
+	box-sizing:border-box;
+	background-color:#EDEDED;
+	margin-right: 1%;
+	width:24.25%;
+	height:45px;
+	color:#686868;
+	text-align:center;
+	font-weight:bold;
+	font-size: 24px;
+	line-height:45px;
+	list-style: none;
+	float: left;
+}
+.query .query_window .gold_ops li.ab_reduce{
+	background-color: #71A5E9;
+}
+.query .query_window .gold_ops li.ab_add{
+	background-color: #7BDB6C;
+	margin-right: 0;
+}
+.query .query_window .gold_ops li.ab_add img{
+	position: relative;
+	top: 10%;
 }
 .query_window .ability_one{
 	box-sizing: border-box;
@@ -106,7 +137,7 @@
 	background-image: url(../image/reduce.png);
 	background-size: 70% 100%;
 	background-position: 50% 50%;
-	background-color:#666;
+	background-color:#71A5E9;
 	background-repeat: no-repeat;
 	width: 10%;
 	height: 100%;
@@ -116,14 +147,14 @@
 	background-image: url(../image/plus.png);
 	background-size: 70% 70%;
 	background-position: 50% 50%;
-	background-color:#666;
+	background-color:#7BDB6C;
 	background-repeat: no-repeat;
 	width: 10%;
 	height: 100%;
 	float: left;
 }
 .query_window .ability_one .ability_one_bar{
-	background-color: #BCBCBC;
+	background-color: #fff;
 	width: 80%;	
 	height: 100%;
 	font-size: 10px;
@@ -132,21 +163,23 @@
 }
 .query_window .ability_one .ability_one_bar .hr{
 	height: 5px;
-	background-color: #000;
+	background-color: #FCE700;
 	width: 100%;
 	display: inline-block;
 }
 .query_window .ability_one .ability_one_bar_button{
-	background-color:#FFF;
-	width:10%;
-	height: 50%;
+	background-color:#9695B7;
+	width:15%;
+	height: 100%;
 	text-align:center;
+	font-weight:bold;
 	font-size:15px;
-	line-height:1.5em;
+	line-height:2.6em;
+	color:#FFFFFF;
 	display: block;
 	
 	position: relative;
-	top:-75%;
+	top:-100%;
 	
 	cursor: default;
 }
