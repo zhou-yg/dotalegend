@@ -100,7 +100,7 @@
 	margin:5px 0;
 	width: 100%;
 }
-.query .query_window .gold_ops li{
+.query .query_window .gold_ops span,.btn{
 	box-sizing:border-box;
 	background-color:#EDEDED;
 	margin-right: 1%;
@@ -114,16 +114,27 @@
 	list-style: none;
 	float: left;
 }
-.query .query_window .gold_ops li.ab_reduce{
-	background-color: #71A5E9;
+.query .query_window .gold_ops .ab_reduce{
+	background-image: url(../image/reduce.png);
+	background-size: 70% 100%;
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
 }
-.query .query_window .gold_ops li.ab_add{
-	background-color: #7BDB6C;
+.query .query_window .gold_ops .ab_add{
+	background-image: url(../image/plus.png);
+	background-size: 70% 70%;
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
 	margin-right: 0;
 }
-.query .query_window .gold_ops li.ab_add img{
-	position: relative;
-	top: 10%;
+.query .query_window .gold_request{
+	width: 100%;
+	text-align: center;
+	float: left;
+	margin-top: 5px;
+}
+.query .query_window .gold_request .gold_request_nums{
+	color:#FF0000;
 }
 .query_window .ability_one{
 	box-sizing: border-box;
@@ -131,6 +142,7 @@
 	padding: 0 5px;
 	width: 100%;
 	height: 40px;
+	float:left;
 	position: relative;
 }
 .query_window .ability_one .ability_one_reduce{

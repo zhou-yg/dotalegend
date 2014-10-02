@@ -35,17 +35,15 @@
 		<aside class="query">
 			<h2 class="_title query_title"></h2>
 			<div class="query_window">
-				<ul class="gold_ops">
-					<li>10</li>
-					<li>44</li>
-					<li class="ab_reduce">
-						<img src="Public/image/reduce.png" width="65%" height="100%" />
-					</li>
-					<li class="ab_add">
-						<img src="Public/image/plus.png" width="65%" height="80%" />
-					</li>
-				</ul>
-				<h3>当前有<span>3</span>个技能</h3>
+				<!--
+				<div class="gold_ops">
+					<span>10</span>
+					<a class="btn ab_basiclvl" href="#basiclvl">44</a>
+					<a class="btn ab_reduce" href="#numReduce" >
+					</a>
+					<a class="btn ab_add" href="#numAdd" >
+					</a>
+				</div>
 				<p id="a1" class="ability_one">
 					<a class="ability_one_reduce" href="#ability/a1/reduce"></a>
 					<span class="ability_one_bar">
@@ -54,6 +52,7 @@
 					</span>
 					<a class="ability_one_plus"  href="#ability/a1/plus"></a>
 				</p>
+				-->
 				<!--
 					<span class="ability_one_plus">-</span>
 					<p class="ability_one_bar">
@@ -135,7 +134,17 @@
 			</div>
 		</script>
 		<script id="hero_ability_header" type="text/template">
-			<h3>当前有<span><%= ability_nums %></span>个技能</h3>
+			<div class="gold_ops">
+				<span><%= ability_nums %></span>
+				<a class="btn ab_basiclvl" href="#basiclvl">0</a>
+				<a class="btn ab_reduce" href="#numReduce" >
+				</a>
+				<a class="btn ab_add" href="#numAdd" >
+				</a>
+			</div>
+			<p class="gold_request">
+				当前所需金钱:<span class="gold_request_nums">0</span>
+			</p>
 		</script>
 		<script id="hero_ability_one" type="text/template">
 			<p id="<%= ability_id %>" class="ability_one">

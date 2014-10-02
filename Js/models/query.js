@@ -135,8 +135,7 @@ $(function(){
 				'mousemove .ability_one_bar,.ability_one_bar_button':'moveBtn',
 			},
 			downBtn:function(_e){
-				if(this.contaienrId === _e.target.parentNode.id || this.contaienrId === _e.target.parentNode.parentNode.id){
-					console.log('down');
+				if(this.containerId === _e.target.parentNode.id || this.containerId === _e.target.parentNode.parentNode.id){
 
 					this.preX = _e.pageX - this.barLeft;
 					
@@ -145,23 +144,16 @@ $(function(){
 			},
 			moveBtn:function(_e){
 				
-				if( this.contaienrId === _e.target.parentNode.id && this.isDown ){
+				if( this.containerId === _e.target.parentNode.id && this.isDown ){
 					
 					var currentX = _e.pageX - this.barLeft;
 
-					if(!this.$btn){
-						this.$btn = $(_e.target.children[1]);
-					}
-
 					this.goTolvl(currentX);
 				
-				}else if(this.contaienrId === _e.target.parentNode.parentNode.id && this.isDown){
+				}else if(this.containerId === _e.target.parentNode.parentNode.id && this.isDown){
 
 					var currentX = _e.pageX - this.barLeft;
 
-					if(!this.$btn){
-						this.$btn = $(_e.target);
-					}
 					this.goTolvl(currentX);
 				}
 			},
@@ -190,11 +182,15 @@ $(function(){
 				}
 			}
 			,
+			remove : function(){
+				$('#'+this.containerId).remove();
+			}
+			,
 			render : function(_i){
 				var temp;
 				var id = 'a'+_i;
 				
-				this.contaienrId = id;
+				this.containerId = id;
 				
 				if(_i==0){
 					temp = _.template($("#hero_ability_header").html(), {ability_nums:this.nums});
@@ -202,13 +198,18 @@ $(function(){
 				}
 				temp = _.template($("#hero_ability_one").html(), {ability_id:id});
 				$(this.el).append(temp);
+				
+				this.$btn = $('#'+id+' '+'.ability_one_bar_button');
 			}				
 		});
 		var AdjustAbilityR = Backbone.Router.extend({
 			initialize:function(){
 			},
 			routes:{
-				'ability/:id/:dir':'clickOn'
+				'ability/:id/:dir':'clickOn',
+				'basiclvl':'setBasiclvl',
+				'numReduce':'setNumReduce',
+				'numAdd':'setNumAdd',
 			},
 			clickOn:function(_id,_dir){
 
@@ -221,8 +222,62 @@ $(function(){
 					this.abilityAdjust(btn,-1);
 				}
 			},
-			goldCollect:function(){
+			setBasiclvl:function(){
 				
+				var toBasiclvl = prompt('设定一个起始等级');
+				
+				if(toBasiclvl!==null||toBasiclvl!==""){
+					
+					toBasiclvl = parseInt(toBasiclvl);
+					if(!isNaN(toBasiclvl)){
+						
+						this.goldBarArr.forEach(function(_el){
+							_el.goTolvl(null,toBasiclvl);
+						});
+
+						$('.gold_request_nums').text(0);
+					}
+				}else{
+
+				}
+				location.href = location.href+'#';
+			}
+			,
+			setNumReduce:function(){
+				
+				var obj = this.goldBarArr.pop();
+				if(obj){
+					
+					obj.remove();
+					$('.gold_ops span').text(this.goldBarArr.length);
+					
+					var currentGold = parseInt($('.gold_request_nums').text());
+					
+					var basiclvl = parseInt($('.ab_basiclvl').text());
+				}
+				location.href = location.href+'#';
+			}
+			,
+			setNumAdd:function(){
+
+				var basiclvl = parseInt($('.ab_basiclvl').text());
+				
+				var abilityOne = new GoldView({el:'.query_window'});
+			
+				abilityOne.render(this.goldBarArr.length+1);
+				if(this.goldBarArr[0]){
+					abilityOne.barLeft = this.goldBarArr[0].barLeft;
+				}else{
+					abilityOne.barLeft = $('.ability_one_bar').offset().left;
+				}
+				
+				this.goldBarArr.push(abilityOne);
+				
+				abilityOne.goTolvl(null,basiclvl);
+				
+				$('.gold_ops span').text(this.goldBarArr.length);
+				
+				location.href = location.href+'#';
 			}
 			,
 			abilityAdjust:function(_btn,_direction){
@@ -232,20 +287,46 @@ $(function(){
 				var left = parseInt(_btn.css('left').substring(0,_btn.css('left').length-2));
 				var singleWidth = (barW-btnW)/90;
 
+				var lvl = parseInt(_btn.text())+1;
+
+				var gold = this.setGold(lvl);
+				var currentGold = parseInt($('.gold_request_nums').text());
+				
 				if(_direction==1){
 					if(left+btnW<barW){
 						_btn.css('left','+='+singleWidth+'px');
-						_btn.text(parseInt(_btn.text())+1);
 					}
 				}
 				if(_direction==-1){
 					if(left>0){
 						_btn.css('left','-='+singleWidth+'px');
-						_btn.text(parseInt(_btn.text())-1);
 					}
 				}
+				_btn.text(lvl);
+
+				$('.gold_request_nums').text(currentGold+gold*_direction);
 				
 				location.href = location.href+'#';
+			},
+			setGold : function(_lvl,_isInit){
+				var i,gold=0;
+				if(_isInit){
+					i=1;
+				}else{
+					i=_lvl;
+				}
+				for(;i<=_lvl;i++){
+					var everyG;
+					if(i<=1){
+						everyG = 100;
+					}else if(i<=41){
+						everyG = (i-1)*500;
+					}else{
+						everyG = 20000 + (i-40)*1000;
+					}
+					gold += everyG;
+				}
+				return gold;
 			}
 		});
 		
@@ -302,7 +383,7 @@ $(function(){
 	}
 	function goldPlus(_heroes,_i){
 
-		var goldBars = [];
+		var goldBarArr = [];
 
 		$('.query .query_title').text('金币');
 		
@@ -316,11 +397,11 @@ $(function(){
 			abilityOne.render(i);
 			abilityOne.barLeft = $('.ability_one_bar').offset().left;
 			
-			goldBars.push(abilityOne);
+			goldBarArr.push(abilityOne);
 		}
 		
 		$('.query').on('mouseup',function(){
-			goldBars.forEach(function(_el){
+			goldBarArr.forEach(function(_el){
 				_el.isDown = false;
 			});
 		});
@@ -328,10 +409,11 @@ $(function(){
 		$('.query_window h3 span').text(len);
 		
 		var aa = new AdjustAction();
+		aa.goldBarArr = goldBarArr;
 		Backbone.history.start();
 		
 	};
-	//goldPlus([1,2,3]);
+	goldPlus([1,2,3]);
 	
 	var queryDoes = {
 		upgrade:queryUpgrade,
