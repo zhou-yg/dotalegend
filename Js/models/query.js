@@ -140,9 +140,10 @@ $(function(){
 				'mousedown .ability_one_bar,.ability_one_bar_button':'downBtn',
 				'mousemove .ability_one_bar,.ability_one_bar_button':'moveBtn',
 				'touchstart .ability_one_bar,.ability_one_bar_button':'downBtn',
-				'touchmove .ability_one_bar,.ability_one_bar_button':'moveBtn',
+				'touchmove .ability_one_bar,.ability_one_bar_button':'moveBtn'
 			},
 			downBtn:function(_e){
+				
 				if(this.containerId === _e.target.parentNode.id || this.containerId === _e.target.parentNode.parentNode.id){
 
 					_e = isDevice ? _e.touches[0] : _e;
@@ -153,7 +154,8 @@ $(function(){
 				}
 			},
 			moveBtn:function(_e){
-				
+
+
 				if( this.containerId === _e.target.parentNode.id && this.isDown ){
 
 					_e = isDevice ? _e.touches[0] : _e;
@@ -426,7 +428,7 @@ $(function(){
 			}
 			
 			abilityOne.render(i);
-			abilityOne.barLeft = $('.ability_one_bar').offset().left;
+			abilityOne.barLeft = $('.ability_one_bar')[0].offsetLeft;
 			
 			goldBarArr.push(abilityOne);
 		}
