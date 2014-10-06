@@ -167,6 +167,7 @@ $(function(){
 					this.singleWidth = (barW-btnW)/90;
 				}
 				var lvlNum,btnX;
+				var basiclvl = parseInt($('.ab_basiclvl').text());
 
 				if(_lvl){
 					lvlNum = _lvl;
@@ -175,7 +176,7 @@ $(function(){
 				}
 				btnX   = lvlNum*this.singleWidth;
 
-				if(lvlNum<=90){
+				if(lvlNum<=90 && lvlNum>=basiclvl){
 					
 					this.$btn.text(lvlNum);
 					this.$btn.css('left',btnX);
@@ -209,7 +210,7 @@ $(function(){
 				'ability/:id/:dir':'clickOn',
 				'basiclvl':'setBasiclvl',
 				'numReduce':'setNumReduce',
-				'numAdd':'setNumAdd',
+				'numAdd':'setNumAdd'
 			},
 			clickOn:function(_id,_dir){
 
@@ -237,6 +238,9 @@ $(function(){
 
 						$('.gold_request_nums').text(0);
 					}
+					
+					$('.ab_basiclvl').text(toBasiclvl);
+						
 				}else{
 
 				}
@@ -265,6 +269,7 @@ $(function(){
 				var abilityOne = new GoldView({el:'.query_window'});
 			
 				abilityOne.render(this.goldBarArr.length+1);
+				
 				if(this.goldBarArr[0]){
 					abilityOne.barLeft = this.goldBarArr[0].barLeft;
 				}else{
@@ -287,54 +292,66 @@ $(function(){
 				var left = parseInt(_btn.css('left').substring(0,_btn.css('left').length-2));
 				var singleWidth = (barW-btnW)/90;
 
-				var lvl = parseInt(_btn.text())+1;
+				var lvl = parseInt(_btn.text())+1*_direction;
+				var basiclvl = parseInt($('.ab_basiclvl').text());
 
-				var gold = this.setGold(lvl);
-				var currentGold = parseInt($('.gold_request_nums').text());
+				var gold;
+
+	
+				location.href = location.href+'#';
+	
+				if(lvl<basiclvl){
+					return;
+				}
+
+				if(_direction>0){
+					gold = setGold(lvl);
+				}else{
+					gold = setGold(lvl+1);
+				}
 				
+				var currentGold = parseInt($('.gold_request_nums').text());
+
 				if(_direction==1){
-					if(left+btnW<barW){
+					if(left+btnW<barW ){
 						_btn.css('left','+='+singleWidth+'px');
 					}
 				}
 				if(_direction==-1){
-					if(left>0){
+					if(left>0 ){
 						_btn.css('left','-='+singleWidth+'px');
 					}
 				}
 				_btn.text(lvl);
-
-				$('.gold_request_nums').text(currentGold+gold*_direction);
 				
-				location.href = location.href+'#';
+				$('.gold_request_nums').text(currentGold+gold*_direction);
 			},
-			setGold : function(_lvl,_isInit){
-				var i,gold=0;
-				if(_isInit){
-					i=1;
-				}else{
-					i=_lvl;
-				}
-				for(;i<=_lvl;i++){
-					var everyG;
-					if(i<=1){
-						everyG = 100;
-					}else if(i<=41){
-						everyG = (i-1)*500;
-					}else{
-						everyG = 20000 + (i-40)*1000;
-					}
-					gold += everyG;
-				}
-				return gold;
-			}
 		});
 		
 		AdjustAction = AdjustAbilityR;
 		GoldView = GoldV;
 		
 	}());
-	
+	function setGold(_lvl,_isInit){
+		var i,gold=0;
+		if(_isInit){
+			i=1;
+		}else{
+			i=_lvl;
+		}
+		for(;i<=_lvl;i++){
+			var everyG;
+			if(i<=1){
+				everyG = 100;
+			}else if(i<=41){
+				everyG = (i-1)*500;
+			}else{
+				everyG = 20000 + (i-40)*1000;
+			}
+			gold += everyG;
+		}
+		return gold;
+	}
 	function queryUpgrade(_selectedHeroes,_i){
 		
 		var sendData;
@@ -384,10 +401,10 @@ $(function(){
 	function goldPlus(_heroes,_i){
 
 		var goldBarArr = [];
-
+		
 		$('.query .query_title').text('金币');
 		
-		for(var i=0,len=_heroes.length;i<len;i++){
+		for(var i=0,len=_heroes.length?_heroes.length:1;i<len;i++){
 			
 			var abilityOne = new GoldView({el:'.query_window'});
 			if(i==0){
@@ -401,9 +418,28 @@ $(function(){
 		}
 		
 		$('.query').on('mouseup',function(){
+
+			var basiclvl = parseInt($('.ab_basiclvl').text());
+			var basicGold = setGold(basiclvl,true);
+			var currentAllGold = 0;
+			
 			goldBarArr.forEach(function(_el){
+				
+				if(_el.$btn){
+					
+					var lvl = parseInt(_el.$btn.text());
+					if(!isNaN(lvl)){
+						
+						currentAllGold += (setGold(lvl,true) - basicGold);
+						
+					}else{
+						throw new Error('lvl is not a number');
+					}
+				}
 				_el.isDown = false;
 			});
+			
+			$('.gold_request_nums').text(currentAllGold);
 		});
 		
 		$('.query_window h3 span').text(len);
@@ -413,8 +449,6 @@ $(function(){
 		Backbone.history.start();
 		
 	};
-	goldPlus([1,2,3]);
-	
 	var queryDoes = {
 		upgrade:queryUpgrade,
 		goldplus:goldPlus
@@ -457,7 +491,6 @@ $(function(){
 			if(queryDoes[type]!=undefined){
 				$window.html('');
 				var p = queryDoes[type].call(this,data,-1);
-				
 			}else{
 				throw new Error('queryDoes this type is null');
 			}

@@ -1,7 +1,7 @@
 .query{
 	background-color:#FFFFFF;
 	position: relative;
-	/*left: 100%;*/
+	left: 100%;
 	top:-200%;
 }
 .query .query_title{
@@ -128,10 +128,10 @@
 	margin-right: 0;
 }
 .query .query_window .gold_request{
+	margin:10px 0;
 	width: 100%;
 	text-align: center;
 	float: left;
-	margin-top: 5px;
 }
 .query .query_window .gold_request .gold_request_nums{
 	color:#FF0000;
