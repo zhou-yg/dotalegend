@@ -24,10 +24,9 @@ $(function() {
 			var $set_upto = o.get('$set_upto');
 
 			var dfd = new $.Deferred();
+			
 			dotalegendGet.getAllHeroes(function(_data, _result){
 				
-				console.log(_data,_result);
-
 				if (_result == 'success') {
 					
 					var allHeroObj = _data;

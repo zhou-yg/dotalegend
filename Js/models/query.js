@@ -2,6 +2,12 @@ $(function(){
 	var LevelsView,ItemsView;
 	var GoldView,AdjustAction;
 	var itemIn = ['w','g','g1','b','b1','b2','p','p1','p2','p3','p4','o'];
+	
+	var isDevice = false;
+	
+	if ("createTouch" in document) {
+		isDevice = true;
+	}
 	//进阶的查询View
 	(function(){
 		var LevelsV = Backbone.View.extend({
@@ -133,9 +139,13 @@ $(function(){
 			events : {
 				'mousedown .ability_one_bar,.ability_one_bar_button':'downBtn',
 				'mousemove .ability_one_bar,.ability_one_bar_button':'moveBtn',
+				'touchstart .ability_one_bar,.ability_one_bar_button':'downBtn',
+				'touchmove .ability_one_bar,.ability_one_bar_button':'moveBtn',
 			},
 			downBtn:function(_e){
 				if(this.containerId === _e.target.parentNode.id || this.containerId === _e.target.parentNode.parentNode.id){
+
+					_e = isDevice ? _e.touches[0] : _e;
 
 					this.preX = _e.pageX - this.barLeft;
 					
@@ -145,6 +155,8 @@ $(function(){
 			moveBtn:function(_e){
 				
 				if( this.containerId === _e.target.parentNode.id && this.isDown ){
+
+					_e = isDevice ? _e.touches[0] : _e;
 					
 					var currentX = _e.pageX - this.barLeft;
 
@@ -372,10 +384,12 @@ $(function(){
 			//进阶等级选择
 			var levelsV = new LevelsView({el:$('.query_window')});
 			levelsV.render();
-			
+            
 			dotalegendGet.getHero(sendData,function(_data,_result){
 
+                
 				if(_result=='success'){
+                    
 
 					if(_data!=null && _data!=''){
 
@@ -417,7 +431,7 @@ $(function(){
 			goldBarArr.push(abilityOne);
 		}
 		
-		$('.query').on('mouseup',function(){
+		$('.query').on('mouseup touchend',function(){
 
 			var basiclvl = parseInt($('.ab_basiclvl').text());
 			var basicGold = setGold(basiclvl,true);
